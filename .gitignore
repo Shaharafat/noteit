@@ -15,3 +15,5 @@
 # production
 /client/build/
 /client/dist
+
+node_modules
