@@ -6,7 +6,6 @@ import initialiseDB from './db/dbConfig.js';
 // load .env files
 dotenv.config();
 
-
 // create app
 const app = express();
 
@@ -15,7 +14,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('Assalamu alaikum');
-})
+});
 
 // connect mongoose
 initialiseDB();
