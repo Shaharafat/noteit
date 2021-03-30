@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
     "baseUrl": ".",
     "paths": {
       "@/controllers/*": ["./controllers/*"],
@@ -7,7 +9,8 @@
       "@/middlewares/*": ["./middlewares/*"],
       "@/models/*": ["./models/*"],
       "@/routes/*": ["./routes/*"],
-      "@/startup/*": ["./startup/*"],
+      "@/startup/*": ["./startup/*"]
     }
-  }
+  },
+  "exclude": ["../node_modules"]
 }
