@@ -1,9 +1,0 @@
-node_modules
-
-# build folders
-build
-dist
-
-# environment variables
-.env
-.env.local

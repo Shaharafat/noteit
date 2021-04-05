@@ -11,7 +11,7 @@
     "no-console": 0,
     "no-underscore-dangle": 0,
     "operator-linebreak": 0,
-    "import/extensions": "never",
+    "import/extensions":0,
     "prettier/prettier": [
       "error",
       {
