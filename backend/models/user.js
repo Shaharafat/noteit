@@ -7,10 +7,11 @@
  *
  */
 import bcrypt from 'bcrypt';
+import crypto from 'crypto';
 import Joi from 'joi';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
-import { errorMessage, successMessage } from '../helpers/debugHelpers.js';
+import { errorMessage, progressMessage } from '../helpers/debugHelpers.js';
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -43,6 +44,8 @@ const userSchema = new mongoose.Schema({
     maxlength: 1024,
     required: true,
   },
+  passwordResetToken: { type: String },
+  passwordResetTimeout: { type: Date },
 });
 
 // hash password before saving
@@ -51,13 +54,14 @@ userSchema.pre('save', async function (next) {
   // then goto next middleware
   if (!this.isModified('password')) {
     next();
+    return;
   }
 
   try {
     const salt = await bcrypt.genSalt(12);
     this.password = await bcrypt.hash(this.password, salt);
 
-    successMessage('Password hashing done.');
+    progressMessage('Password hashing done.');
     next();
   } catch (err) {
     errorMessage('Hashing password failed');
@@ -67,16 +71,29 @@ userSchema.pre('save', async function (next) {
 
 // match user password
 userSchema.methods.matchPassword = function (password) {
-  successMessage('Matching password.');
+  progressMessage('Matching password.');
 
   return bcrypt.compare(password, this.password);
 };
 
 // generate jwt token
 userSchema.methods.generateAuthToken = function () {
-  successMessage('Creating jwt token.');
+  progressMessage('Creating jwt token.');
 
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE });
+};
+
+userSchema.methods.generateResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString('hex');
+  const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+
+  // set token to user
+  this.passwordResetToken = hashedToken;
+  // set token expire time
+  this.passwordResetTimeout = Date.now() + 1000 * 60 * 10;
+
+  progressMessage('Reset token Created.');
+  return resetToken;
 };
 
 // user model
