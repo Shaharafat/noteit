@@ -17,11 +17,17 @@ export const debugDB = debug('app:db');
 export const debugServer = debug('app:server');
 
 // error
-const error = debug('errors');
+const error = debug('task:error');
 
 // success
-const success = debug('success');
+const success = debug('task:success');
+
+// processing
+const progress = debug('task:progress');
+
 // formatted message
 export const errorMessage = (message) => error(colors.red.bold('❌ ', message));
 
 export const successMessage = (message) => success(colors.green.bold('✔️ ', message));
+
+export const progressMessage = (message) => progress(colors.yellow.bold('👣 ', message));
