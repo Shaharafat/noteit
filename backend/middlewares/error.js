@@ -14,7 +14,7 @@ const errorMiddleware = (err, req, res, next) => {
   error.message = err.message;
 
   if (err.code === 11000) {
-    errorMessage('Duplicate data used, email or username used before');
+    errorMessage('Duplicate data used');
     const message = 'Email or username already exists.';
     error = new ErrorResponse(400, message);
   }

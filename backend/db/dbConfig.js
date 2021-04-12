@@ -12,6 +12,7 @@ const initialiseDB = () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
+      useFindAndModify: false,
     })
     .then(() => debugDB(colors.green('Connected to mongodb')))
     .catch(() => debugDB(colors.underline.red('mongodb connection failed')));
