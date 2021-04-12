@@ -22,7 +22,7 @@ router.post('/login', login);
 router.post('/forgotpassword', forgotPassword);
 
 // reset password
-router.post('/resetpassword/:resetToken', resetPassword);
+router.put('/resetpassword/:resetToken', resetPassword);
 
 // export router
 export default router;

@@ -107,7 +107,12 @@ export const validateUser = (user) => {
     lastName: Joi.string().min(3).max(50).required(),
     username: Joi.string().min(3).max(50).required(),
     email: Joi.string().email().required(),
-    password: Joi.string().min(8).max(1024).required(),
+    password: Joi.string()
+      .min(8)
+      .max(1024)
+      .regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
+      .message('password must contain atleast 1 capital letter, 1 small letter and 1 digit')
+      .required(),
   });
 
   // validate schema
