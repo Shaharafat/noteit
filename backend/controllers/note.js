@@ -11,12 +11,12 @@ import { Note } from '../models/note.js';
 import { Tag } from '../models/tag.js';
 import ErrorResponse from '../utils/errorResponse.js';
 
-// note create controller
+// ✔️ note create controller
 export const createNote = async (req, res, next) => {
   progressMessage('Creating new note.');
   const { title, details, tags, user } = req.body;
 
-  // this function add new tags to tag model
+  //  this function add new tags to tag model
   const updateTagList = (noteTags) => {
     noteTags.forEach(async (tag) => {
       const hasTag = await Tag.findOne({ name: tag });
@@ -60,7 +60,7 @@ export const createNote = async (req, res, next) => {
   }
 };
 
-// get all notes controller
+// ✔️ get all notes controller
 export const getAllNotes = async (req, res, next) => {
   progressMessage('Fetching all notes.');
 
@@ -74,7 +74,7 @@ export const getAllNotes = async (req, res, next) => {
   }
 };
 
-// get notes of specific user controller
+// ✔️ get notes of specific user controller
 export const getSpecificNotes = async (req, res, next) => {
   progressMessage('Fetching notes for single user.');
 
@@ -89,11 +89,11 @@ export const getSpecificNotes = async (req, res, next) => {
     res.send(users);
   } catch (error) {
     errorMessage('Notes fetching failed.');
-    next(new ErrorResponse(500, 'User notes fetchind failed.'));
+    next(new ErrorResponse(500, 'User notes fetching failed.'));
   }
 };
 
-// delete a note controller
+// ✔️ delete a note controller
 export const deleteNote = async (req, res, next) => {
   progressMessage('User requested to delete a note');
 

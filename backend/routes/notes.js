@@ -20,7 +20,7 @@ router.get('/', getAllNotes);
 router.get('/:userId', getSpecificNotes);
 
 // create new note
-router.post('/add', validate(validateNote), createNote);
+router.post('/newNote', validate(validateNote), createNote);
 
 // delete a note
 router.delete('/delete/:noteId', deleteNote);

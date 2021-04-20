@@ -14,7 +14,7 @@ const initialiseDB = () => {
       useCreateIndex: true,
       useFindAndModify: false,
     })
-    .then(() => debugDB(colors.green('Connected to mongodb')))
+    .then(() => debugDB(colors.green('Connected to mongodb ✌️')))
     .catch(() => debugDB(colors.underline.red('mongodb connection failed')));
 };
 

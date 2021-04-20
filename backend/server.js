@@ -17,8 +17,10 @@ import initialiseDB from './db/dbConfig.js';
 import { debugServer } from './helpers/debugHelpers.js';
 import errorMiddleware from './middlewares/error.js';
 
-import userRouter from './routes/users.js';
+// router
 import noteRouter from './routes/notes.js';
+import tagRouter from './routes/tags.js';
+import userRouter from './routes/users.js';
 
 // load .env files
 dotenv.config();
@@ -35,6 +37,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/users', userRouter);
 app.use('/notes', noteRouter);
+app.use('/tags', tagRouter);
 
 // error middleware
 app.use(errorMiddleware);
@@ -46,5 +49,5 @@ app.get('/', (req, res) => {
 // server listen
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
-  debugServer(colors.green(`👋 Connected to the port ${port} ✌️`));
+  debugServer(colors.green(`👋 Connected to the port ${port} 🚀`));
 });
