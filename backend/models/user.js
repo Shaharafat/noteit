@@ -80,7 +80,9 @@ userSchema.methods.matchPassword = function (password) {
 userSchema.methods.generateAuthToken = function () {
   progressMessage('Creating jwt token.');
 
-  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE });
+  return jwt.sign({ user: { id: this._id, name: this.firstName } }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
 };
 
 userSchema.methods.generateResetToken = function () {

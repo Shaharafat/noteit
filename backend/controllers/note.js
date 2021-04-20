@@ -29,7 +29,7 @@ export const createNote = async (req, res, next) => {
           await newTag.save();
           successMessage('New tag added');
         } catch (error) {
-          next(500, 'Tag adding failed.');
+          next(error);
         }
       } else {
         progressMessage('Tag already exists');
@@ -53,43 +53,28 @@ export const createNote = async (req, res, next) => {
     // add new tags to tag model
     progressMessage('updating tags list');
     updateTagList(tags); // update tag list after creating notes
-    res.status(200).send(note);
+    res.status(200).json({ success: true, note });
   } catch (error) {
     errorMessage('Note creation failed.');
     next(error);
   }
 };
 
-// ✔️ get all notes controller
-export const getAllNotes = async (req, res, next) => {
-  progressMessage('Fetching all notes.');
-
-  try {
-    const users = await Note.find().populate('user', 'firstName email -_id');
-    successMessage('Notes fetching successfull');
-    res.send(users);
-  } catch (error) {
-    errorMessage('Notes fetching failed.');
-    next(new ErrorResponse(500, 'Note fetchind failed'));
-  }
-};
-
-// ✔️ get notes of specific user controller
-export const getSpecificNotes = async (req, res, next) => {
+// ✔️ get users notes
+export const getUserNotes = async (req, res, next) => {
   progressMessage('Fetching notes for single user.');
 
   const { userId } = req.params;
-
   try {
-    const users = await Note.find({ user: { _id: userId } }).populate(
-      'user',
-      'firstName email -_id'
-    );
+    const users = await Note.find({ user: { _id: userId } })
+      .populate('user', 'firstName email -_id')
+      .sort('-createdAt');
+
     successMessage('Notes fetching successfull');
-    res.send(users);
+    res.status(200).json({ success: true, users });
   } catch (error) {
     errorMessage('Notes fetching failed.');
-    next(new ErrorResponse(500, 'User notes fetching failed.'));
+    next(error);
   }
 };
 
@@ -103,8 +88,7 @@ export const deleteNote = async (req, res, next) => {
     const note = await Note.findById(noteId);
     if (!note) {
       errorMessage('No user found with that id.');
-
-      return next(404, 'Note not found with this id.');
+      return next(new ErrorResponse(404, 'Note not found with this id.'));
     }
   } catch (error) {
     errorMessage('Note finding failed.');

@@ -18,12 +18,12 @@ export const searchTags = async (req, res, next) => {
   const { search } = req.body;
   // make a regex query to mongodb
   try {
-    const tags = await Tag.fin({ name: { $regex: `^${search}`, $options: 'ig' } });
+    const tags = await Tag.find({ name: { $regex: `^${search}`, $options: 'ig' } });
 
     successMessage('Tags found');
     res.status(200).json({ success: true, tags });
   } catch (error) {
     errorMessage('No tag found');
-    next(new ErrorResponse(500, 'Search failed.'));
+    next(error);
   }
 };

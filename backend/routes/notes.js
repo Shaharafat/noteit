@@ -7,23 +7,21 @@
  *
  */
 import express from 'express';
-import { createNote, deleteNote, getAllNotes, getSpecificNotes } from '../controllers/note.js';
+import { createNote, deleteNote, getUserNotes } from '../controllers/note.js';
+import { isAuthenticated } from '../middlewares/auth.js';
 import validate from '../middlewares/validate.js';
 import { validateNote } from '../models/note.js';
 
 const router = express.Router();
 
-// get all notes
-router.get('/', getAllNotes);
-
 // find all notes for a specific user
-router.get('/:userId', getSpecificNotes);
+router.get('/:userId', isAuthenticated, getUserNotes);
 
 // create new note
-router.post('/newNote', validate(validateNote), createNote);
+router.post('/newNote', [isAuthenticated, validate(validateNote)], createNote);
 
 // delete a note
-router.delete('/delete/:noteId', deleteNote);
+router.delete('/delete/:noteId', isAuthenticated, deleteNote);
 
 // export router
 export default router;
