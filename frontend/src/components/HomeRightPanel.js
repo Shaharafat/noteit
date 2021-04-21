@@ -7,31 +7,19 @@
  *
  */
 import React from 'react';
-import { Button } from '.';
+import { Route, Switch } from 'react-router-dom';
+import { AuthSection, RegisterLoginForm } from '.';
 
 const HomeRightPanel = () => {
   return (
-    <>
-      <h2 className="uppercase text-2xl md:text-4xl lg:text-6xl font-barlow font-bold">
-        Hey, What&apos;Up
-      </h2>
-      <p className="text-electromagnatic font-railway text-md md:text-lg text-center font-semibold mt-4">
-        Nice to see you here.
-      </p>
-      <Button to="/home/login" full={true} large={true} pill={true} linkButton={true}>
-        Login
-      </Button>
-      <Button
-        to="/home/signup"
-        primary={true}
-        large={true}
-        full={true}
-        pill={true}
-        linkButton={true}
-      >
-        Signup
-      </Button>
-    </>
+    <div className="flex flex-col justify-center items-center h-full">
+      <Switch>
+        <Route path="/home" exact component={AuthSection} />
+        <Route path="/home/login" component={RegisterLoginForm} />
+        <Route path="/home/signup" component={RegisterLoginForm} />
+        <Route path="/home/forgotpassword" />
+      </Switch>
+    </div>
   );
 };
 

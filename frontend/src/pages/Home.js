@@ -7,14 +7,14 @@
  *
  */
 import React from 'react';
-import { Button } from '../components';
+import { HomeRightPanel } from '../components';
 import logo from '../icons/noteitlogo.png';
 
 const Home = () => {
   return (
-    <section className="min-h-screen grid grid-cols-1">
+    <section className="min-h-screen grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
       {/* site intro */}
-      <div className="bg-sourLemon px-3 grid place-items-center">
+      <div className="bg-sourLemon px-3 grid place-items-center col-span-1 lg:col-span-2 border-r-0 md:border-r-4 border-electromagnatic ">
         <div className="flex flex-col items-center">
           {/* logo */}
           <div className="flex items-center">
@@ -27,10 +27,12 @@ const Home = () => {
           <p className="text-electromagnatic font-railway text-md md:text-lg text-center font-semibold mt-4">
             Fast | Easy to use | Access from anywhere
           </p>
-          <Button to="/login" full={true} large={true} pill={true} linkButton={true}>
-            Get Started
-          </Button>
         </div>
+      </div>
+
+      {/* auth routes */}
+      <div className="bg-antiFlashWhite px-3">
+        <HomeRightPanel />
       </div>
     </section>
   );

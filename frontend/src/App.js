@@ -1,9 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { RegisterLoginForm } from './components';
 import { Dashboard, Home } from './pages';
-import HomeRoute from './routes/HomeRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import { StoreProvider } from './store/Store';
 
@@ -11,16 +9,10 @@ function App() {
   return (
     <StoreProvider>
       <Router>
-        <Redirect to="/home" />
         <Switch>
-          <HomeRoute exact path="/home" component={Home} />
+          <Route exact path="/" render={() => <Redirect to="/home" />} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
-          <Route path="/login">
-            <RegisterLoginForm forLogin={true} />
-          </Route>
-          <Route path="/signup">
-            <RegisterLoginForm fotLogin={false} />
-          </Route>
+          <Route path="/home" component={Home} />
         </Switch>
       </Router>
     </StoreProvider>
