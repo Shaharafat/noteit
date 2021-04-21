@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { RegisterLoginForm } from './components';
 import { Dashboard, Home } from './pages';
@@ -11,6 +11,7 @@ function App() {
   return (
     <StoreProvider>
       <Router>
+        <Redirect to="/home" />
         <Switch>
           <HomeRoute exact path="/home" component={Home} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
