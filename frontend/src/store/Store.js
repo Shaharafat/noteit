@@ -8,6 +8,7 @@
  */
 
 import { createContext, useContext, useEffect, useReducer } from 'react';
+import { LOADING_END } from './constants';
 import { initialState, reducer } from './reducer';
 
 // create store context
@@ -20,9 +21,10 @@ export const useStore = () => useContext(Store);
 export const StoreProvider = ({ children }) => {
   // userReducer
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  console.log(state);
   useEffect(() => {
     // ---
+    dispatch({ type: LOADING_END });
   }, []);
 
   const storeValue = {

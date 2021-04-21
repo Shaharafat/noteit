@@ -18,7 +18,7 @@ export const isAuthenticated = async (req, res, next) => {
 
   const hasToken = req.headers.x_auth_token;
   let token;
-  if (hasToken.startsWith('Bearer')) {
+  if (hasToken?.startsWith('Bearer')) {
     progressMessage('Token found.');
 
     // get actual token

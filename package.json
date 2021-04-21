@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "type": "module", 
+  "type": "module",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Shah Arafat",
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^7.4.2",
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "colors": "^1.4.0",
     "concurrently": "^6.0.0",
@@ -28,7 +29,8 @@
     "joi-objectid": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.2",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "eslint-config-airbnb": "18.2.1",
