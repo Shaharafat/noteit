@@ -5,3 +5,11 @@
 .container-area {
   @apply px-4 md:px-10 lg:px-16;
 }
+
+.form-label{
+  @apply font-railway font-semibold;
+}
+
+.common-button:disabled{
+  @apply opacity-30 cursor-not-allowed;
+}

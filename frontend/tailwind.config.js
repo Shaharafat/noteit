@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         electromagnatic: '#2f3640',
         antiFlashWhite: '#f1f2f6',
+        sourLemon: '#ffeaa7',
       },
     },
   },

@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 
 const Button = ({
   linkButton,
+  type,
   handler,
   to,
   children,
@@ -22,6 +23,7 @@ const Button = ({
   full,
   primary,
   danger,
+  disabled,
 }) => {
   return linkButton ? (
     <Link
@@ -49,8 +51,10 @@ const Button = ({
     </Link>
   ) : (
     <button
+      type={type}
       onClick={handler}
-      className={` text-gray-100 mt-3 text-center ${
+      disabled={disabled}
+      className={`text-gray-100 mt-3 text-center common-button ${
         small
           ? 'px-4 py-1'
           : medium
