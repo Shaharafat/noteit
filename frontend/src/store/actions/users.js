@@ -10,9 +10,10 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { LOGIN_USER } from '../constants';
 
+// signup and update store
 export const signupUser = async (body, dispatch) => {
   try {
-    console.log(body);
+    console.log('before try');
     const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/register`, body);
     const { success, token, message } = response.data;
 

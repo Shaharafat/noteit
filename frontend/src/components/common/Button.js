@@ -8,6 +8,7 @@
  */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import btnLoader from '../../icons/buttonLoader.svg';
 
 const Button = ({
   linkButton,
@@ -73,9 +74,17 @@ const Button = ({
       }
       }`}
     >
-      {children}
+      <span className="flex items-center">
+        {disabled && (
+          <img
+            src={btnLoader}
+            alt="loader"
+            className={`${small ? 'w-4' : medium ? 'w-6' : large ? 'w-8' : 'w-3'} mr-1 `}
+          />
+        )}
+        {children}
+      </span>
     </button>
   );
 };
-
 export default Button;

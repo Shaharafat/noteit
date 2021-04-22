@@ -8,7 +8,7 @@
  */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '..';
+import { Button, ResponseBox } from '..';
 import { signupSchema, validateSchema } from '../../helpers/schemas';
 import { signupUser } from '../../store/actions/users';
 import { useStore } from '../../store/Store';
@@ -16,6 +16,7 @@ import { useStore } from '../../store/Store';
 const RegisterForm = () => {
   const { dispatch } = useStore();
   const [disabled, setDisabled] = useState(false);
+  const { MessageBox, configureMessageBox } = ResponseBox();
 
   // for vaidation
   const {
@@ -31,16 +32,27 @@ const RegisterForm = () => {
     const requestBody = { firstname, lastname, email, password };
 
     // signup user and update store
-    const result = await signupUser(requestBody, dispatch);
+    const response = await signupUser(requestBody, dispatch);
+    const { success, message } = response;
+    // show messages
+    if (success) {
+      configureMessageBox(true, message);
+    } else {
+      configureMessageBox(false, message);
+    }
+
+    // enable button after operation
     setDisabled(false);
+
     // TODO: show notification
-    console.log(result);
+    console.log(response);
   };
 
   return (
     <div className="w-full text-electromagnatic bg-white shadow-lg rounded-md p-3">
       <h1 className="text-2xl font-bold font-railway">Sign up</h1>
 
+      <MessageBox />
       {/* form */}
       <form onSubmit={handleSubmit(registerUser)} className="mt-3">
         <div className="grid gap-3 grid-cols-1 md:grid-cols-2 justify-items-stretch ">

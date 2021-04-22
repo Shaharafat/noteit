@@ -3,6 +3,7 @@ import ForgotPassword from './auth/ForgotPassword';
 import LoginForm from './auth/LoginForm';
 import RegisterForm from './auth/RegisterForm';
 import Button from './common/Button';
+import ResponseBox from './common/ResponseBox';
 import HomeLeftPanel from './HomeLeftPanel';
 import HomeRightPanel from './HomeRightPanel';
 
@@ -14,4 +15,5 @@ export {
   HomeRightPanel,
   AuthSection,
   ForgotPassword,
+  ResponseBox,
 };
