@@ -6,27 +6,39 @@
  * Date: 21-04-2021
  *
  */
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '..';
+import { signupSchema, validateSchema } from '../../helpers/schemas';
+import { signupUser } from '../../store/actions/users';
+import { useStore } from '../../store/Store';
 
 const RegisterForm = () => {
+  const { dispatch } = useStore();
+  const [disabled, setDisabled] = useState(false);
+
   // for vaidation
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    mode: 'onTouched',
-  });
+  } = validateSchema(signupSchema);
 
   // executes when form submitted
-  const registerUser = (data) => {
-    console.log(data);
+  const registerUser = async (data) => {
+    setDisabled(true);
+    const { firstname, lastname, email, password } = data;
+    const requestBody = { firstname, lastname, email, password };
+
+    // signup user and update store
+    const result = await signupUser(requestBody, dispatch);
+    setDisabled(false);
+    // TODO: show notification
+    console.log(result);
   };
 
   return (
-    <div className="w-full text-electromagnatic shadow-lg rounded-md p-3">
+    <div className="w-full text-electromagnatic bg-white shadow-lg rounded-md p-3">
       <h1 className="text-2xl font-bold font-railway">Sign up</h1>
 
       {/* form */}
@@ -39,9 +51,8 @@ const RegisterForm = () => {
             <input
               type="text"
               id="firstname"
-              className="mt-1 px-2 py-1 border border-gray-400 w-full"
+              className="mt-1 px-2 py-1 border border-gray-300 w-full"
               placeholder="Type firstname"
-              required
               {...register('firstname')}
             />
             <p className="text-red-500 text-sm mt-1">{errors.firstname?.message}</p>
@@ -53,9 +64,8 @@ const RegisterForm = () => {
             <input
               type="text"
               id="lastname"
-              className="mt-1 px-2 py-1 border border-gray-400 w-full"
+              className="mt-1 px-2 py-1 border border-gray-300 w-full"
               placeholder="Type lastname"
-              required
               {...register('lastname')}
             />
             <p className="text-red-500 text-sm mt-1">{errors.lastname?.message}</p>
@@ -68,9 +78,8 @@ const RegisterForm = () => {
           <input
             type="email"
             id="email"
-            className="mt-1 px-2 py-1 border border-gray-400 w-full"
+            className="mt-1 px-2 py-1 border border-gray-300 w-full"
             placeholder="Type email"
-            required
             {...register('email')}
           />
           <p className="text-red-500 text-sm mt-1">{errors.email?.message}</p>
@@ -82,9 +91,8 @@ const RegisterForm = () => {
           <input
             type="password"
             id="password"
-            className="mt-1 px-2 py-1 border border-gray-400 w-full"
+            className="mt-1 px-2 py-1 border border-gray-300 w-full"
             placeholder="Type password"
-            required
             {...register('password')}
           />
           <p className="text-red-500 text-sm mt-1">{errors.password?.message}</p>
@@ -96,17 +104,24 @@ const RegisterForm = () => {
           <input
             type="password"
             id="confirmpassword"
-            className="mt-1 px-2 py-1 border border-gray-400 w-full"
+            className="mt-1 px-2 py-1 border border-gray-300 w-full"
             placeholder="Type password again"
-            required
             {...register('confirmPassword')}
           />
-          <p className="text-red-500 text-sm mt-1">{errors.password?.confirmPassword}</p>
+          <p className="text-red-500 text-sm mt-1">{errors.confirmPassword?.message}</p>
         </div>
-        <Button type={'submit'} medium={true}>
+        <Button type={'submit'} disabled={disabled} medium={true}>
           Register
         </Button>
       </form>
+      <div className="border-t border-gray-200 mt-3">
+        <p className="text-center mt-2 font-railway">
+          Already have an account?{' '}
+          <Link to="/home/login" className="text-blue-600 hover:underline">
+            Login
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

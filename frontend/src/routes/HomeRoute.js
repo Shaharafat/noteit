@@ -10,11 +10,9 @@ import React from 'react';
 import { Redirect, Route } from 'react-router';
 import { useStore } from '../store/Store';
 
-const HomeRoute = ({ component: Component, ...rest }) => {
+const HomeRoute = ({ children, ...rest }) => {
   const { state } = useStore();
-  return (
-    <Route {...rest} render={() => (state.user ? <Redirect to="/dashboard" /> : <Component />)} />
-  );
+  return <Route {...rest} render={() => (state.user ? <Redirect to="/dashboard" /> : children)} />;
 };
 
 export default HomeRoute;

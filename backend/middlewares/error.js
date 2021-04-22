@@ -12,10 +12,10 @@ import ErrorResponse from '../utils/errorResponse.js';
 const errorMiddleware = (err, req, res, next) => {
   let error = { ...err };
   error.message = err.message;
-
+  console.log(error);
   if (err.code === 11000) {
     errorMessage('Duplicate data used');
-    const message = 'Email or username already exists.';
+    const message = 'Email contains an existing account.';
     error = new ErrorResponse(400, message);
   }
 

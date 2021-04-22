@@ -14,24 +14,17 @@ import mongoose from 'mongoose';
 import { errorMessage, progressMessage } from '../helpers/debugHelpers.js';
 
 const userSchema = new mongoose.Schema({
-  firstName: {
+  firstname: {
     type: String,
     minlength: 3,
     maxlength: 50,
     required: true,
   },
-  lastName: {
+  lastname: {
     type: String,
     minlength: 3,
     maxlength: 50,
     required: true,
-  },
-  username: {
-    type: String,
-    minlength: 3,
-    maxlength: 50,
-    required: true,
-    unique: true,
   },
   email: {
     type: String,
@@ -80,7 +73,7 @@ userSchema.methods.matchPassword = function (password) {
 userSchema.methods.generateAuthToken = function () {
   progressMessage('Creating jwt token.');
 
-  return jwt.sign({ user: { id: this._id, name: this.firstName } }, process.env.JWT_SECRET, {
+  return jwt.sign({ user: { id: this._id, name: this.firstname } }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
 };
@@ -105,9 +98,8 @@ export const User = mongoose.model('User', userSchema);
 export const validateUser = (user) => {
   // create schema
   const schema = Joi.object({
-    firstName: Joi.string().min(3).max(50).required(),
-    lastName: Joi.string().min(3).max(50).required(),
-    username: Joi.string().min(3).max(50).required(),
+    firstname: Joi.string().min(3).max(50).required(),
+    lastname: Joi.string().min(3).max(50).required(),
     email: Joi.string().email().required(),
     password: Joi.string()
       .min(8)

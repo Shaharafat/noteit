@@ -16,19 +16,18 @@ import sendEmail from '../utils/sendmail.js';
 // send auth token
 const sendAuthToken = (user, statusCode, res) => {
   const token = user.generateAuthToken(); // generate auth token
-  res.status(statusCode).json({ success: true, token });
+  res.status(statusCode).json({ success: true, token, message: 'Signup successful' });
   successMessage('Logged in successly and Auth token sent.');
 };
 
 // ✔️ register user controller
 export const register = async (req, res, next) => {
-  const { firstName, lastName, username, email, password } = req.body;
+  const { firstname, lastname, email, password } = req.body;
 
   progressMessage('Creating new user.');
   let user = new User({
-    firstName,
-    lastName,
-    username,
+    firstname,
+    lastname,
     email,
     password,
   });

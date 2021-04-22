@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.body{
+  @apply font-railway font-normal;
+}
+
 .container-area {
   @apply px-4 md:px-10 lg:px-16;
 }

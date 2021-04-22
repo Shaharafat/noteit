@@ -1,7 +1,7 @@
 /*
  *
- * Title: login form
- * Description: login form
+ * Title: forgot password
+ * Description: forgot password
  * Author: Shah Arafat
  * Date: 22-04-2021
  *
@@ -9,24 +9,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '..';
-import { loginSchema, validateSchema } from '../../helpers/schemas';
+import { forgotPasswordSchema, validateSchema } from '../../helpers/schemas';
 
-const LoginForm = () => {
+const ForgotPassword = () => {
   // for vaidation
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = validateSchema(loginSchema);
+  } = validateSchema(forgotPasswordSchema);
 
   // executes when form submitted
   const loginUser = (data) => {
     console.log(data);
   };
 
+  // validation schema
   return (
     <div className="w-full text-electromagnatic bg-white shadow-lg rounded-md p-3">
-      <h1 className="text-2xl font-bold font-railway">Login</h1>
+      <h1 className="text-2xl font-bold font-railway">Forgot Password</h1>
 
       {/* form */}
       <form onSubmit={handleSubmit(loginUser)} className="mt-3">
@@ -42,34 +43,18 @@ const LoginForm = () => {
             {...register('email')}
           />
           <p className="text-red-500 text-sm mt-1">{errors.email?.message}</p>
-        </div>
-        <div>
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            className="mt-1 px-2 py-1 border border-gray-300 w-full"
-            placeholder="Type password"
-            {...register('password')}
-          />
-          <p className="text-red-500 text-sm mt-1">{errors.password?.message}</p>
+          <small className="text-blue-400">
+            We will sent you a password reset link to your email
+          </small>
         </div>
         <Button type={'submit'} medium={true}>
-          Login
+          Get Reset Link
         </Button>
       </form>
       <div className="border-t border-gray-200 mt-3">
         <p className="text-center mt-2 font-railway">
-          New here?{' '}
-          <Link to="/home/signup" className="text-blue-600 hover:underline">
-            Create an account
-          </Link>
-        </p>
-        <p className="text-center mt-2 font-railway">
-          <Link to="/home/forgotPassword" className="text-blue-600 hover:underline">
-            Forgot password?
+          <Link to="/home/login" className="text-blue-600 hover:underline">
+            Login
           </Link>
         </p>
       </div>
@@ -77,4 +62,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ForgotPassword;

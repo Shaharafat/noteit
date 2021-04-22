@@ -7,7 +7,7 @@
  *
  */
 // dependencies
-import { LOADING_END, LOADING_START } from './constants';
+import { LOADING_END, LOADING_START, LOGIN_USER, LOGOUT_USER } from './constants';
 
 // initial states
 export const initialState = {
@@ -23,6 +23,12 @@ export const reducer = (state, action) => {
     }
     case LOADING_END: {
       return { ...state, loading: false };
+    }
+    case LOGIN_USER: {
+      return { ...state, user: action.payload.user };
+    }
+    case LOGOUT_USER: {
+      return { ...state, user: null };
     }
     default: {
       return state;
