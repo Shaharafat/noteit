@@ -52,20 +52,24 @@ export const login = async (req, res, next) => {
   if (!email || !password) {
     return next(new ErrorResponse(400, 'Email and password field is required'));
   }
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return next(new ErrorResponse(400, 'Invalid email or password!'));
+    }
 
-  const user = await User.findOne({ email });
-  if (!user) {
-    return next(new ErrorResponse(400, 'Invalid email or password!'));
+    const isMatch = await user.matchPassword(password);
+    if (!isMatch) {
+      return next(new ErrorResponse(400, 'Invalid email or password!'));
+    }
+
+    progressMessage('Email and password matched');
+    // if everything is ok. then send token.
+    sendAuthToken(user, 200, res);
+  } catch (error) {
+    errorMessage('Login failed for server issue');
+    next(error);
   }
-
-  const isMatch = await user.matchPassword(password);
-  if (!isMatch) {
-    return next(new ErrorResponse(400, 'Invalid email or password!'));
-  }
-
-  progressMessage('Email and password matched');
-  // if everything is ok. then send token.
-  sendAuthToken(user, 200, res);
 };
 
 // ✔️ forgot password controller
@@ -99,7 +103,7 @@ export const forgotPassword = async (req, res, next) => {
 
   try {
     // sent email
-    await sendEmail(options, res);
+    await sendEmail(options);
 
     successMessage('Mail sent.');
     res.status(200).json({

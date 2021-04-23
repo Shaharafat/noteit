@@ -6,12 +6,15 @@
  * Date: 22-04-2021
  *
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '..';
+import { Button, useResponseBox } from '..';
 import { forgotPasswordSchema, validateSchema } from '../../helpers/schemas';
+import { sendResetEmail } from '../../store/actions/users';
 
 const ForgotPassword = () => {
+  const [disabled, setDisabled] = useState(false);
+  const { MessageBox, configureMessageBox } = useResponseBox();
   // for vaidation
   const {
     register,
@@ -20,17 +23,26 @@ const ForgotPassword = () => {
   } = validateSchema(forgotPasswordSchema);
 
   // executes when form submitted
-  const loginUser = (data) => {
-    console.log(data);
+  const getResetEmail = async (data) => {
+    setDisabled(true);
+    const response = await sendResetEmail(data);
+    const { success, message } = response;
+    setDisabled(false);
+
+    // show notification
+    if (success) {
+      configureMessageBox(true, message);
+    } else {
+      configureMessageBox(true, message);
+    }
   };
 
-  // validation schema
   return (
     <div className="w-full text-electromagnatic bg-white shadow-lg rounded-md p-3">
       <h1 className="text-2xl font-bold font-railway">Forgot Password</h1>
-
+      <MessageBox />
       {/* form */}
-      <form onSubmit={handleSubmit(loginUser)} className="mt-3">
+      <form onSubmit={handleSubmit(getResetEmail)} className="mt-3">
         <div>
           <label htmlFor="email" className="form-label">
             Email
@@ -47,7 +59,7 @@ const ForgotPassword = () => {
             We will sent you a password reset link to your email
           </small>
         </div>
-        <Button type={'submit'} medium={true}>
+        <Button type={'submit'} medium={true} disabled={disabled}>
           Get Reset Link
         </Button>
       </form>

@@ -6,12 +6,19 @@
  * Date: 22-04-2021
  *
  */
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '..';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { Button, useResponseBox } from '..';
 import { loginSchema, validateSchema } from '../../helpers/schemas';
+import { loginUser } from '../../store/actions/users';
+import { useStore } from '../../store/Store';
 
 const LoginForm = () => {
+  const { MessageBox, configureMessageBox } = useResponseBox();
+  const history = useHistory();
+  const [disabled, setDisabled] = useState(false);
+  const { dispatch } = useStore();
+
   // for vaidation
   const {
     register,
@@ -20,16 +27,27 @@ const LoginForm = () => {
   } = validateSchema(loginSchema);
 
   // executes when form submitted
-  const loginUser = (data) => {
-    console.log(data);
+  const login = async (data) => {
+    setDisabled(true);
+    const response = await loginUser(data, dispatch);
+    const { success, message } = response;
+    setDisabled(false);
+
+    if (success) {
+      // goto dashboard
+      history.push('/dashboard');
+    } else {
+      // show error message
+      configureMessageBox(false, message);
+    }
   };
 
   return (
     <div className="w-full text-electromagnatic bg-white shadow-lg rounded-md p-3">
       <h1 className="text-2xl font-bold font-railway">Login</h1>
-
+      <MessageBox />
       {/* form */}
-      <form onSubmit={handleSubmit(loginUser)} className="mt-3">
+      <form onSubmit={handleSubmit(login)} className="mt-3">
         <div>
           <label htmlFor="email" className="form-label">
             Email
@@ -56,7 +74,7 @@ const LoginForm = () => {
           />
           <p className="text-red-500 text-sm mt-1">{errors.password?.message}</p>
         </div>
-        <Button type={'submit'} medium={true}>
+        <Button type={'submit'} disabled={disabled} medium={true}>
           Login
         </Button>
       </form>

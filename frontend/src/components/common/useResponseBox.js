@@ -19,8 +19,8 @@ const ResponseBox = () => {
     setIsSuccess(setSuccess);
   };
 
-  // remove message automatically after 5 seconds
   useEffect(() => {
+    // remove message automatically after 5 seconds
     if (message) {
       setTimeout(() => {
         setMessage('');

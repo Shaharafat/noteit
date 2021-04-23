@@ -8,7 +8,7 @@
  */
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { AuthSection, ForgotPassword, LoginForm, RegisterForm } from '.';
+import { AuthSection, ForgotPassword, LoginForm, RegisterForm, ResetPassword } from '.';
 
 const HomeRightPanel = () => {
   return (
@@ -18,6 +18,7 @@ const HomeRightPanel = () => {
         <Route path="/home/signup" component={RegisterForm} />
         <Route path="/home/login" component={LoginForm} />
         <Route path="/home/forgotpassword" component={ForgotPassword} />
+        <Route path="/home/resetpassword/:resetToken" component={ResetPassword} />
       </Switch>
     </div>
   );

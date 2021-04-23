@@ -7,8 +7,8 @@
  *
  */
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, ResponseBox } from '..';
+import { Link, useHistory } from 'react-router-dom';
+import { Button, useResponseBox } from '..';
 import { signupSchema, validateSchema } from '../../helpers/schemas';
 import { signupUser } from '../../store/actions/users';
 import { useStore } from '../../store/Store';
@@ -16,7 +16,8 @@ import { useStore } from '../../store/Store';
 const RegisterForm = () => {
   const { dispatch } = useStore();
   const [disabled, setDisabled] = useState(false);
-  const { MessageBox, configureMessageBox } = ResponseBox();
+  const { MessageBox, configureMessageBox } = useResponseBox();
+  const history = useHistory();
 
   // for vaidation
   const {
@@ -34,9 +35,11 @@ const RegisterForm = () => {
     // signup user and update store
     const response = await signupUser(requestBody, dispatch);
     const { success, message } = response;
+
     // show messages
     if (success) {
-      configureMessageBox(true, message);
+      // go to dashboard
+      history.push('/dashboard');
     } else {
       configureMessageBox(false, message);
     }
