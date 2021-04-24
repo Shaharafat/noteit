@@ -10,6 +10,7 @@
 import jwt_decode from 'jwt-decode';
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import { Redirect } from 'react-router-dom';
+import { setThemeToRoot } from '../helpers/themes';
 import { LOADING_END, LOGIN_USER, LOGOUT_USER } from './constants';
 import { initialState, reducer } from './reducer';
 
@@ -26,6 +27,10 @@ export const StoreProvider = ({ children }) => {
   console.log(state);
 
   useEffect(() => {
+    // set theme
+    setThemeToRoot();
+
+    // check user
     let hasToken = localStorage.getItem('x_auth_token');
     // verify token
     if (hasToken?.startsWith('Bearer')) {

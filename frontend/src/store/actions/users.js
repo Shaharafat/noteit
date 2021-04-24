@@ -8,7 +8,7 @@
  */
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { LOGIN_USER } from '../constants';
+import { LOGIN_USER, LOGOUT_USER } from '../constants';
 
 // ✔️ signup and update store
 export const signupUser = async (body, dispatch) => {
@@ -95,4 +95,10 @@ export const setPassword = async (resetToken, password, dispatch) => {
     const { success, message } = error.response?.data;
     return { success, message };
   }
+};
+
+// ✔️ Logout user
+export const logoutUser = (dispatch) => {
+  localStorage.removeItem('x_auth_token');
+  dispatch({ type: LOGOUT_USER });
 };

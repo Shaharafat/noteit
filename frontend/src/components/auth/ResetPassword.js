@@ -35,8 +35,10 @@ const ResetPassword = () => {
     setDisabled(false);
 
     if (success) {
+      // goto dashboard
       history.push('/dashboard');
     } else {
+      // show error message
       configureMessageBox(false, message);
     }
   };

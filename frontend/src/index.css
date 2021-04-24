@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.body{
+.body {
   @apply font-railway font-normal;
 }
 
@@ -10,10 +10,20 @@
   @apply px-4 md:px-10 lg:px-16;
 }
 
-.form-label{
+.form-label {
   @apply font-railway font-semibold;
 }
 
-.common-button:disabled{
+.common-button:disabled {
   @apply opacity-30 cursor-not-allowed;
+}
+
+.nav-main {
+  min-height: calc(100vh - 5em);
+}
+
+@media screen and (min-width: 768px) {
+  .nav-main {
+    min-height: auto;
+  }
 }
