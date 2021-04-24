@@ -15,7 +15,8 @@ import { useStore } from '../../store/Store';
 
 const Navbar = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const [theme, setTheme] = useState('');
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
   // store
   const {
     state: {
@@ -33,7 +34,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`container-area text-white h-20 dark:bg-midnightBlue bg-sourLemon relative md:static flex justify-between items-center`}
+      className={`container-area text-white h-20 dark:bg-midnightBlue bg-sourLemon md:bg-none relative md:static flex justify-between items-center`}
     >
       <Link className="font-bold text-2xl text-electromagnatic dark:text-sourLemon font-barlow">
         Noteit

@@ -20,6 +20,10 @@ router.get('/:userId', isAuthenticated, getUserNotes);
 // create new note
 router.post('/newNote', [isAuthenticated, validate(validateNote)], createNote);
 
+
+// get notes by tag
+// router.post('/')
+
 // delete a note
 router.delete('/delete/:noteId', isAuthenticated, deleteNote);
 

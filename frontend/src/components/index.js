@@ -7,6 +7,10 @@ import Button from './common/Button';
 import Layout from './common/Layout';
 import Navbar from './common/Navbar';
 import useResponseBox from './common/useResponseBox';
+import DashboardQuerySection from './dashboard/DashboardQuerySection';
+import SearchTags from './dashboard/SearchTags';
+import SmallNoteItem from './dashboard/SmallNoteItem';
+import TagItem from './dashboard/TagItem';
 import DashboardSidebar from './DashboardSidebar';
 import HomeLeftPanel from './HomeLeftPanel';
 import HomeRightPanel from './HomeRightPanel';
@@ -24,4 +28,8 @@ export {
   Navbar,
   Layout,
   DashboardSidebar,
+  DashboardQuerySection,
+  SmallNoteItem,
+  TagItem,
+  SearchTags,
 };

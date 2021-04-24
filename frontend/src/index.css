@@ -18,7 +18,8 @@
   @apply opacity-30 cursor-not-allowed;
 }
 
-.nav-main {
+.nav-main,
+.h-min-nav {
   min-height: calc(100vh - 5em);
 }
 

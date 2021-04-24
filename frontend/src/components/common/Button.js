@@ -29,7 +29,7 @@ const Button = ({
   return linkButton ? (
     <Link
       to={`${to}`}
-      className={`text-gray-100 mt-3 text-center ${
+      className={`text-gray-100 mt-3 flex items-center justify-center text-center ${
         small
           ? 'px-4 py-1'
           : medium
