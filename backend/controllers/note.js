@@ -106,3 +106,23 @@ export const deleteNote = async (req, res, next) => {
     next(new ErrorResponse(400, "Can't delete the note"));
   }
 };
+
+// ✔️ get searched notes
+export const getSearchedNotes = async (req, res, next) => {
+  progressMessage('Request to get notes by tag name');
+
+  const { tag, id } = req.body;
+  try {
+    progressMessage('Searching notes');
+
+    // ! very important to know the regex style
+    const notes = await Note.find({ user: { _id: id }, tags: `${tag}` });
+
+    successMessage('Notes fetching done.');
+    res.status(200).json({ success: true, notes });
+    next();
+  } catch (error) {
+    errorMessage('Notes fetching failed.');
+    next(error);
+  }
+};

@@ -9,11 +9,19 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { TagItem, useResponseBox } from '..';
+import { getNotesByTag } from '../../store/actions/notes';
+import { useStore } from '../../store/Store';
 
 const SearchTags = () => {
   const { MessageBox, configureMessageBox } = useResponseBox();
   const [searchText, setSearchText] = useState('');
   const [searchedTags, setSearchedTags] = useState([]);
+  const {
+    state: {
+      user: { id },
+    },
+    dispatch,
+  } = useStore();
 
   // get tags when matched typing on search box
   const getTags = async (text) => {
@@ -25,25 +33,34 @@ const SearchTags = () => {
       const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/tags`, {
         search: text,
       });
-
       const { success, tags } = response.data;
       if (success) {
         setSearchedTags(tags);
       }
-      console.log(success, tags);
     } catch (error) {
       configureMessageBox(false, error.response?.data?.message);
     }
   };
 
   // get notes refering the tag on submit.
-  const getSearchedNotes = () => {
-    console.log('submitted');
+  const getSearchedNotes = async (e) => {
+    e.preventDefault();
+
+    // empty tag list
     setSearchedTags([]);
+
+    // const response = await getAllSearchedNotes(searchText, id, dispatch);
+    const response = await getNotesByTag(searchText, id, dispatch);
+    const { success } = response;
+
+    // if success false. show notification on UI
+    if (!success) {
+      configureMessageBox(success, response.message);
+    }
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full relative">
       <MessageBox />
       <form className="w-full" onSubmit={getSearchedNotes}>
         <input
@@ -55,12 +72,13 @@ const SearchTags = () => {
         />
       </form>
       {/* notes from search results */}
-      <ul className="divide-y divide-electromagnatic dark:divide-sourLemon max-h-40 overflow-y-scroll ">
+      <ul className="divide-y divide-electromagnatic dark:divide-sourLemon max-h-40 overflow-y-auto w-full absolute top-18 ">
         {searchedTags.map((tag, index) => (
           <TagItem
             key={index}
             tag={tag}
             setSearchText={setSearchText}
+            setSearchedTags={setSearchedTags}
             getNotes={getSearchedNotes}
           />
         ))}

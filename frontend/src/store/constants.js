@@ -12,3 +12,6 @@ export const LOADING_START = 'LOADING_START';
 export const LOADING_END = 'LOADING_END';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const GET_ALL_NOTES = 'GET_ALL_NOTES';
+export const ADD_NEW_NOTE = 'ADD_NEW_NOTE';
+export const DELETE_SINGLE_NOTE = 'DELETE_SINGLE_NOTE';

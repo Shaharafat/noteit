@@ -7,12 +7,13 @@
  *
  */
 // dependencies
-import { LOADING_END, LOADING_START, LOGIN_USER, LOGOUT_USER } from './constants';
+import { GET_ALL_NOTES, LOADING_END, LOADING_START, LOGIN_USER, LOGOUT_USER } from './constants';
 
 // initial states
 export const initialState = {
   loading: true,
   user: null,
+  notes: [],
 };
 
 // reducer function. this will be passed in useReducer.
@@ -29,6 +30,9 @@ export const reducer = (state, action) => {
     }
     case LOGOUT_USER: {
       return { ...state, user: null };
+    }
+    case GET_ALL_NOTES: {
+      return { ...state, notes: action.payload.notes };
     }
     default: {
       return state;

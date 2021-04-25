@@ -24,7 +24,6 @@ export const useStore = () => useContext(Store);
 export const StoreProvider = ({ children }) => {
   // userReducer
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
 
   useEffect(() => {
     // set theme
@@ -54,6 +53,7 @@ export const StoreProvider = ({ children }) => {
     dispatch({ type: LOADING_END });
   }, []);
 
+  console.log(state);
   const storeValue = {
     state,
     dispatch,
