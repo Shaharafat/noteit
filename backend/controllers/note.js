@@ -25,14 +25,17 @@ export const createNote = async (req, res, next) => {
       if (!hasTag) {
         progressMessage('Tag doesn"t exist, Adding new tag');
         try {
-          const newTag = new Tag({ name: tag });
+          const newTag = new Tag({ name: tag, noteCount: 1 });
           await newTag.save();
-          successMessage('New tag added');
+          successMessage(`New tag added - ${tag}`);
         } catch (error) {
           next(error);
         }
       } else {
-        progressMessage('Tag already exists');
+        progressMessage('Tag already exists, so updating count');
+        const updateTag = await Tag.findOneAndUpdate({ name: tag }, { $inc: { noteCount: +1 } });
+        await updateTag.save();
+        successMessage(`Note count updated for ${tag}`);
       }
     });
   };

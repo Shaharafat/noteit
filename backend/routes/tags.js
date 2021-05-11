@@ -8,12 +8,16 @@
  */
 // dependencies
 import express from 'express';
-import { searchTags } from '../controllers/tag.js';
+import { getAllTags, searchTags } from '../controllers/tag.js';
+import { isAuthenticated } from '../middlewares/auth.js';
 
 const router = express.Router();
 
 // get tag on search text
 router.post('/', searchTags);
+
+// get all tag
+router.get('/', isAuthenticated, getAllTags);
 
 // export
 export default router;
