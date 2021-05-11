@@ -6,13 +6,22 @@
  *
  */
 import React from 'react';
-import { Navbar } from '../components';
+import { Navbar, NoteDetails, NotesList } from '../components';
 
 const Dashboard = () => {
   return (
     <>
-      <Navbar />
-      <section className="container-area h-min-nav grid gap-5 grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 bg-antiFlashWhite dark:bg-wetEsphalt"></section>
+      <section className="grid grid-cols-12 ">
+        <div className="col-span-3 lg:col-span-2">
+          <Navbar />
+        </div>
+        <div className="col-span-4 lg:col-span-4">
+          <NotesList />
+        </div>
+        <div className="col-span-5 lg:col-span-6">
+          <NoteDetails />
+        </div>
+      </section>
     </>
   );
 };

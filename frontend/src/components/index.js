@@ -7,17 +7,15 @@ import Button from './common/Button';
 import Layout from './common/Layout';
 import Navbar from './common/Navbar';
 import useResponseBox from './common/useResponseBox';
-import DashboardQuerySection from './dashboard/DashboardQuerySection';
-import DashboardRightPanel from './dashboard/DashboardRightPanel';
-import SearchTags from './dashboard/SearchTags';
-import SmallNoteItem from './dashboard/SmallNoteItem';
-import TagItem from './dashboard/TagItem';
 import DashboardSidebar from './DashboardSidebar';
 import HomeLeftPanel from './HomeLeftPanel';
 import HomeRightPanel from './HomeRightPanel';
 import AddNoteForm from './note/AddNoteForm';
 import Editor from './note/Editor';
 import TagManager from './note/TagManager';
+import NoteDetails from './NoteDetails';
+import NotesList from './NotesList';
+import SingleTag from './SingleTag';
 
 export {
   RegisterForm,
@@ -32,12 +30,10 @@ export {
   Navbar,
   Layout,
   DashboardSidebar,
-  DashboardQuerySection,
-  SmallNoteItem,
-  TagItem,
-  SearchTags,
-  DashboardRightPanel,
   AddNoteForm,
   Editor,
   TagManager,
+  SingleTag,
+  NotesList,
+  NoteDetails,
 };

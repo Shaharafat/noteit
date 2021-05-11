@@ -17,8 +17,10 @@ module.exports = {
     extend: {
       backgroundColor: {
         sourLemon: '#ffeaa7',
+        // sourLemon: '#9EDB2E',
         midnightBlue: '#2c3e50',
         wetEsphalt: '#34495e',
+        sourLemonDark: '#fce28d',
       },
       fontFamily: {
         barlow: ['Barlow Condensed', 'sans-serif'],
