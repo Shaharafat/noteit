@@ -6,7 +6,8 @@
  *
  */
 import React from 'react';
-import { Navbar, NoteDetails, NotesList } from '../components';
+import { Navbar, NotesList } from '../components';
+import DashboardRightSection from '../components/DashboardRightSection';
 
 const Dashboard = () => {
   return (
@@ -19,7 +20,7 @@ const Dashboard = () => {
           <NotesList />
         </div>
         <div className="col-span-5 lg:col-span-6">
-          <NoteDetails />
+          <DashboardRightSection />
         </div>
       </section>
     </>

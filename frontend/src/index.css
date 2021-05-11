@@ -28,3 +28,11 @@
     min-height: auto;
   }
 }
+
+/* editor */
+.ql-editor {
+  min-height: 250px;
+  max-height: 250px;
+  overflow-y: auto;
+  background: white;
+}

@@ -12,6 +12,7 @@ import btnLoader from '../../icons/buttonLoader.svg';
 
 const Button = ({
   linkButton,
+  extraStyles,
   type,
   handler,
   to,
@@ -46,7 +47,7 @@ const Button = ({
           ? 'bg-red-600 hover:bg-red-700'
           : 'bg-green-600 hover:bg-green-700'
       }
-      }`}
+      } ${extraStyles}`}
     >
       {children}
     </Link>

@@ -11,12 +11,15 @@ import React from 'react';
 const TagManager = ({ register, errors }) => {
   return (
     <div className="flex flex-col">
-      <label htmlFor="tags" className="text-electromagnatic dark:text-antiFlashWhite">
-        Tags (maximum 5)
+      <label
+        htmlFor="tags"
+        className="text-electromagnatic dark:text-antiFlashWhite mt-3 font-semibold"
+      >
+        Tags (maximum 3)
       </label>
       <input
         type="text"
-        className="px-1 py-2 mt-1"
+        className="px-1 py-2 mt-1 border border-gray-200 focus:outline-none"
         placeholder="Tags must be comma separated (maximum five)"
         id="tags"
         {...register('tags')}

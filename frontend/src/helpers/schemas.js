@@ -68,18 +68,9 @@ export const resetPasswordSchema = yup.object().shape({
 
 // note schema
 export const addNoteSchema = yup.object().shape({
-  title: yup.string().required(),
-  details: yup
-    .object()
-    .shape({
-      time: yup.date(),
-      blocks: yup.array(),
-      version: yup.string(),
-    })
-    .required(),
-  // tags: yup.array(yup.string()).max(5).min(1).required(),
+  title: yup.string().min(5).max(200).required('Title is required.'),
   tags: yup
     .string()
-    .matches(/^\w+[,]\w+$/)
+    .matches(/^[^,]+(?:,[^,]+){0,2}$/, 'Tag must be between 1 to 3')
     .required(),
 });

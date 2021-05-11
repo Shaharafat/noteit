@@ -36,15 +36,15 @@ const Editor = ({ note, setNote }) => {
     'indent',
     'link',
   ];
-  console.log(note);
 
   return (
     <>
+      <h3 className="text-electromagnatic dark:text-antiFlashWhite mt-3 font-semibold">Note</h3>
       <ReactQuill
         value={note}
         onChange={setNote}
         theme="snow"
-        className="bg-antiFlashWhite h-80 mt-4 border-none"
+        className="bg-antiFlashWhite mt-1 border-none outline-none"
         modules={modules}
         formats={formats}
       />

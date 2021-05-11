@@ -20,7 +20,7 @@ const SingleNote = ({ note: { title, tags, details, createdAt } }) => {
     <div className="w-full rounded-md bg-white p-3 my-2 shadow-md">
       <h1 className="text-xl font-bold text-electromagnatic">{title}</h1>
       <span className="text-gray-400 text-sm">{noteCreationDate}</span>
-      <p className="text-md text-electromagnatic ">{details}</p>
+      <p className="text-md text-electromagnatic ">{details.toString().substr(0, 50) + '...'}</p>
 
       <div className="grid grid-cols-5 gap-2">
         <div className="flex flex-wrap mt-2 col-span-4">

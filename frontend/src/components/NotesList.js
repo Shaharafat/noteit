@@ -7,7 +7,7 @@
  *
  */
 import React from 'react';
-import { SingleNote } from '.';
+import { Button, SingleNote } from '.';
 import { useStore } from '../store/Store';
 
 const NotesList = () => {
@@ -20,7 +20,7 @@ const NotesList = () => {
   };
 
   return (
-    <div className="min-h-screen max-h-screen overflow-y-auto bg-antiFlashWhite px-3 py-5 flex flex-col">
+    <div className="min-h-screen max-h-screen overflow-y-auto bg-antiFlashWhite px-3 py-5 flex flex-col relative">
       {/* search form */}
       <div>
         <form onSubmit={searchNote} className="border-b border-gray-300 pb-4">
@@ -32,13 +32,23 @@ const NotesList = () => {
           />
         </form>
       </div>
-
+      {/* All notes here */}
       <div>
         <h1 className="text-electromagnatic font-bold font-railway text-2xl mt-2">Notes</h1>
         {notes.map((note) => (
           <SingleNote key={note._id} note={note} />
         ))}
       </div>
+
+      <Button
+        linkButton={true}
+        to="/dashboard/newNote"
+        pill={true}
+        medium={true}
+        extraStyles="sticky bottom-0 shadow-md w-full"
+      >
+        New Note
+      </Button>
     </div>
   );
 };
