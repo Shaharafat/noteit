@@ -65,3 +65,21 @@ export const resetPasswordSchema = yup.object().shape({
     .oneOf([yup.ref('password'), null], 'Passwords must match')
     .required('Required field'),
 });
+
+// note schema
+export const addNoteSchema = yup.object().shape({
+  title: yup.string().required(),
+  details: yup
+    .object()
+    .shape({
+      time: yup.date(),
+      blocks: yup.array(),
+      version: yup.string(),
+    })
+    .required(),
+  // tags: yup.array(yup.string()).max(5).min(1).required(),
+  tags: yup
+    .string()
+    .matches(/^\w+[,]\w+$/)
+    .required(),
+});

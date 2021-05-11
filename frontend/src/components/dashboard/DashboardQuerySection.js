@@ -13,7 +13,7 @@ import { Button, SearchTags } from '..';
 const DashboardQuerySection = () => {
   return (
     <div className="flex flex-col items-center">
-      <Button medium="true" linkButton={true} full={true}>
+      <Button medium="true" to={'/dashboard/addNote'} linkButton={true} full={true}>
         <FaPlusCircle className="inline-block mr-2" /> New Note
       </Button>
       {/* search */}

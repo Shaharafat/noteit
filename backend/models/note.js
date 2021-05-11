@@ -32,7 +32,7 @@ export const validateNote = (note) => {
   const schema = Joi.object({
     title: Joi.string().min(5).max(200).required(),
     details: Joi.string().required(),
-    tags: Joi.array().items(Joi.string().required()).max(5),
+    tags: Joi.array().items(Joi.string().required()).min(1).max(5),
     user: Joi.objectId().required(),
   });
 

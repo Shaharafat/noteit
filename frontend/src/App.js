@@ -5,6 +5,7 @@ import { Dashboard, Home } from './pages';
 import HomeRoute from './routes/HomeRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import { StoreProvider } from './store/Store';
+import 'react-quill/dist/quill.snow.css';
 
 function App() {
   return (
