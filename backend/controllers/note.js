@@ -69,12 +69,12 @@ export const getUserNotes = async (req, res, next) => {
 
   const { userId } = req.params;
   try {
-    const users = await Note.find({ user: { _id: userId } })
+    const notes = await Note.find({ user: { _id: userId } })
       .populate('user', 'firstName email -_id')
       .sort('-createdAt');
 
     successMessage('Notes fetching successfull');
-    res.status(200).json({ success: true, users });
+    res.status(200).json({ success: true, notes });
   } catch (error) {
     errorMessage('Notes fetching failed.');
     next(error);

@@ -11,6 +11,7 @@ import jwt_decode from 'jwt-decode';
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import { Redirect } from 'react-router-dom';
 import { setThemeToRoot } from '../helpers/themes';
+import { getAllNotes } from './actions/notes';
 import { getAllTags } from './actions/tags';
 import { LOADING_END, LOGIN_USER, LOGOUT_USER } from './constants';
 import { initialState, reducer } from './reducer';
@@ -41,8 +42,13 @@ export const StoreProvider = ({ children }) => {
       // check expirity.
       if (exp > Date.now() / 1000) {
         dispatch({ type: LOGIN_USER, payload: { user } });
+
+        // get all notes of this user
+        getAllNotes(dispatch, user.id);
+
         // fetch all tags data
         getAllTags(dispatch);
+
         // if logged in . goto dashboard
         <Redirect to="/dashboard" />;
         dispatch({ type: LOADING_END });

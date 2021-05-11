@@ -15,7 +15,9 @@ import Editor from './note/Editor';
 import TagManager from './note/TagManager';
 import NoteDetails from './NoteDetails';
 import NotesList from './NotesList';
+import SingleNote from './SingleNote';
 import SingleTag from './SingleTag';
+import SingleTagName from './SingleTagName';
 
 export {
   RegisterForm,
@@ -36,4 +38,6 @@ export {
   SingleTag,
   NotesList,
   NoteDetails,
+  SingleNote,
+  SingleTagName,
 };
