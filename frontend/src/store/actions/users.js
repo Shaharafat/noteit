@@ -9,6 +9,8 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { LOGIN_USER, LOGOUT_USER } from '../constants';
+import { getAllNotes } from './notes';
+import { getAllTags } from './tags';
 
 // ✔️ signup and update store
 export const signupUser = async (body, dispatch) => {
@@ -44,6 +46,12 @@ export const loginUser = async (body, dispatch) => {
 
       // log in user
       dispatch({ type: LOGIN_USER, payload: { user } });
+      // get all notes of this user
+      getAllNotes(dispatch, user.id);
+
+      // fetch all tags data
+      getAllTags(dispatch);
+
       return { success, message };
     }
   } catch (error) {

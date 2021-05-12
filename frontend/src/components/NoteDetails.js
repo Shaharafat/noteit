@@ -12,10 +12,12 @@ import React, { useEffect, useState } from 'react';
 import { FaStar, FaTrash } from 'react-icons/fa';
 import { useParams } from 'react-router';
 import { SingleTagName } from '.';
+import loader from '../icons/loader.svg';
 
 const NoteDetails = () => {
   const { noteId } = useParams();
   const [noteDetails, setNoteDetails] = useState();
+  const [loading, setLoading] = useState(false);
 
   const formatDate = (date) => {
     return formatDistance(new Date(date), new Date(), { addSuffix: true });
@@ -23,6 +25,7 @@ const NoteDetails = () => {
 
   useEffect(() => {
     let getNote = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_SERVER_URL}/notes/get/${noteId}`,
@@ -30,22 +33,29 @@ const NoteDetails = () => {
         );
 
         const { success, note } = response.data;
-        console.log(note.title);
+
         if (success) {
           setNoteDetails(note);
         }
+        setLoading(false);
       } catch (error) {
         const { success, message } = error.response?.data;
         if (!success) {
           console.log(message);
         }
+        setLoading(false);
       }
     };
 
+    // fetch note data
     getNote();
   }, []);
 
-  return (
+  return loading ? (
+    <div className="w-full min-h-screen grid place-items-center">
+      <img src={loader} className="w-12" />
+    </div>
+  ) : (
     <div className="min-h-screen max-h-screen overflow-y-auto">
       <h1 className="text-4xl font-bold font-railway mt-6">{noteDetails?.title}</h1>
       <div className="flex justify-between">
