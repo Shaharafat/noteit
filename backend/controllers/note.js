@@ -17,27 +17,64 @@ export const createNote = async (req, res, next) => {
   const { title, details, tags, user } = req.body;
 
   //  this function add new tags to tag model
-  const updateTagList = (noteTags) => {
-    noteTags.forEach(async (tag) => {
-      const hasTag = await Tag.findOne({ name: tag });
-      progressMessage('Finding matching tag');
+  // const updateTagList = (noteTags) => {
+  //   noteTags.forEach(async (tag) => {
+  //     const hasTag = await Tag.findOne({ name: tag });
+  //     progressMessage('Finding matching tag');
 
-      if (!hasTag) {
-        progressMessage('Tag doesn"t exist, Adding new tag');
-        try {
-          const newTag = new Tag({ name: tag, noteCount: 1 });
-          await newTag.save();
-          successMessage(`New tag added - ${tag}`);
-        } catch (error) {
-          next(error);
+  //     if (!hasTag) {
+  //       progressMessage('Tag doesn"t exist, Adding new tag');
+  //       try {
+  //         const newTag = new Tag({ name: tag, noteCount: 1 });
+  //         await newTag.save();
+
+  //         successMessage(`New tag added - ${tag}`);
+  //       } catch (error) {
+  //         next(error);
+  //       }
+  //     } else {
+  //       progressMessage('Tag already exists, so updating count');
+
+  //       const updateTag = await Tag.findOneAndUpdate({ name: tag }, { $inc: { noteCount: +1 } });
+  //       await updateTag.save();
+  //       successMessage(`Note count updated for ${tag}`);
+  //     }
+  //   });
+  // };
+  const updateTagList = async (noteTags) => {
+    // this will store the absolutely new tags.
+    const newTags = [];
+
+    // wait untill updating tags list.
+    await Promise.all(
+      noteTags.map(async (tag) => {
+        const hasTag = await Tag.findOne({ name: tag });
+        progressMessage('Finding matching tag');
+
+        if (!hasTag) {
+          progressMessage('Tag doesn"t exist, Adding new tag');
+          try {
+            const newTag = new Tag({ name: tag, noteCount: 1 });
+            await newTag.save();
+
+            newTags.push(newTag);
+
+            successMessage(`New tag added - ${tag}`);
+          } catch (error) {
+            next(error);
+          }
+        } else {
+          progressMessage('Tag already exists, so updating count');
+
+          const updateTag = await Tag.findOneAndUpdate({ name: tag }, { $inc: { noteCount: +1 } });
+          await updateTag.save();
+          successMessage(`Note count updated for ${tag}`);
         }
-      } else {
-        progressMessage('Tag already exists, so updating count');
-        const updateTag = await Tag.findOneAndUpdate({ name: tag }, { $inc: { noteCount: +1 } });
-        await updateTag.save();
-        successMessage(`Note count updated for ${tag}`);
-      }
-    });
+      })
+    );
+
+    // after updating return new tags
+    return newTags;
   };
 
   // note model
@@ -55,8 +92,10 @@ export const createNote = async (req, res, next) => {
     successMessage('New note created.');
     // add new tags to tag model
     progressMessage('updating tags list');
-    updateTagList(tags); // update tag list after creating notes
-    res.status(200).json({ success: true, note });
+    const newTags = await updateTagList(tags); // update tag list after creating notes
+
+    successMessage('tag updated');
+    res.status(200).json({ success: true, note, newTags }); // newTags contains absolutely new tags.
   } catch (error) {
     errorMessage('Note creation failed.');
     next(error);

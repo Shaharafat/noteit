@@ -9,11 +9,13 @@
 import React, { useState } from 'react';
 import { Button, Editor, TagManager } from '..';
 import { addNoteSchema, validateSchema } from '../../helpers/schemas';
+import { createNewNote } from '../../store/actions/notes';
+import { useStore } from '../../store/Store';
 
 const AddNoteForm = () => {
   const [note, setNote] = useState('');
   const [loading, setLoading] = useState(false);
-  // const { dispatch } = useStore();
+  const { state, dispatch } = useStore();
 
   const {
     register,
@@ -23,10 +25,17 @@ const AddNoteForm = () => {
 
   // execute when form submits
   const submitNewNote = (data) => {
-    data = { ...data, details: note };
-    console.log(data, note);
     setLoading(true);
-    console.log('submitted');
+    // make tag array
+    data.tags = data.tags.split(',');
+
+    data = { ...data, details: note, user: state.user.id };
+    console.log(data);
+    const response = createNewNote(dispatch, data);
+    if (response.success) {
+      console.log('successfull');
+    }
+    setLoading(false);
   };
 
   return (

@@ -8,6 +8,8 @@
  */
 // dependencies
 import {
+  ADD_NEW_NOTE,
+  ADD_NEW_TAG,
   GET_ALL_NOTES,
   GET_ALL_TAGS,
   LOADING_END,
@@ -44,6 +46,12 @@ export const reducer = (state, action) => {
     }
     case GET_ALL_TAGS: {
       return { ...state, tags: action.payload.tags };
+    }
+    case ADD_NEW_NOTE: {
+      return { ...state, notes: [action.payload.note, ...state.notes] };
+    }
+    case ADD_NEW_TAG: {
+      return { ...state, tags: [...state.tags, ...action.payload.tags] };
     }
     default: {
       return state;

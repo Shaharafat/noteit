@@ -16,9 +16,9 @@ const SingleTag = ({ tag }) => {
         <FaTag className="inline-block mr-2 text-sm text-midnightBlue" />
         <h2 className="text-electromagnatic text-lg font-semibold font-railway">{tag.name}</h2>
       </div>
-      <span className="bg-midnightBlue rounded-full text-sourLemon font-semibold px-3 py-0 grid items-center">
+      {/* <span className="bg-midnightBlue rounded-full text-sourLemon font-semibold px-3 py-0 grid items-center">
         {tag.noteCount}
-      </span>
+      </span> */}
     </div>
   );
 };

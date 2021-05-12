@@ -10,17 +10,20 @@
 import { formatDistance } from 'date-fns';
 import React from 'react';
 import { FaStar, FaTrash } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { SingleTagName } from '.';
 
-const SingleNote = ({ note: { title, tags, details, createdAt } }) => {
+const SingleNote = ({ note: { _id: id, title, tags, createdAt } }) => {
   // format date
   const noteCreationDate = formatDistance(new Date(createdAt), new Date(), { addSuffix: true });
 
   return (
     <div className="w-full rounded-md bg-white p-3 my-2 shadow-md">
-      <h1 className="text-xl font-bold text-electromagnatic">{title}</h1>
+      <Link to={`/dashboard/note/${id}`} className="hover:underline">
+        <h1 className="text-xl font-bold text-electromagnatic">{title}</h1>
+      </Link>
+
       <span className="text-gray-400 text-sm">{noteCreationDate}</span>
-      <p className="text-md text-electromagnatic ">{details.toString().substr(0, 50) + '...'}</p>
 
       <div className="grid grid-cols-5 gap-2">
         <div className="flex flex-wrap mt-2 col-span-4">

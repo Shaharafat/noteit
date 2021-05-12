@@ -16,3 +16,4 @@ export const GET_ALL_NOTES = 'GET_ALL_NOTES';
 export const ADD_NEW_NOTE = 'ADD_NEW_NOTE';
 export const DELETE_SINGLE_NOTE = 'DELETE_SINGLE_NOTE';
 export const GET_ALL_TAGS = 'GET_ALL_TAGS';
+export const ADD_NEW_TAG = 'ADD_NEW_TAG';

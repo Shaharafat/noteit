@@ -8,7 +8,7 @@
  */
 
 import axios from 'axios';
-import { GET_ALL_NOTES } from '../constants';
+import { ADD_NEW_NOTE, ADD_NEW_TAG, GET_ALL_NOTES } from '../constants';
 
 // TODO: cancel token
 // ✔️ search users notes by tag name
@@ -25,7 +25,6 @@ export const getNotesByTag = async (tag, id, dispatch) => {
     );
 
     const { success, notes } = response.data;
-    console.log(notes);
     if (success) {
       // if fetching successful then populate store
       dispatch({ type: GET_ALL_NOTES, payload: { notes } });
@@ -44,7 +43,6 @@ export const getAllNotes = async (dispatch, id) => {
     });
 
     const { success, notes } = response.data;
-    console.log(notes, success, id);
     if (success) {
       // if fetching successful then populate store
       dispatch({ type: GET_ALL_NOTES, payload: { notes } });
@@ -53,5 +51,28 @@ export const getAllNotes = async (dispatch, id) => {
   } catch (error) {
     const { success, message } = error.response?.data;
     return { success, message };
+  }
+};
+
+// ✔️ create new note
+export const createNewNote = async (dispatch, body) => {
+  try {
+    const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/notes/newNote`, body, {
+      headers: { x_auth_token: localStorage.getItem('x_auth_token') },
+    });
+
+    const { success, note, newTags } = response.data;
+
+    if (success) {
+      // update store
+      dispatch({ type: ADD_NEW_NOTE, payload: { note } });
+      // update taglist
+      dispatch({ type: ADD_NEW_TAG, payload: { tags: newTags } });
+    }
+
+    return success;
+  } catch (error) {
+    const { success } = error.response?.data;
+    return success;
   }
 };
