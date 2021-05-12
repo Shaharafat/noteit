@@ -120,6 +120,24 @@ export const getUserNotes = async (req, res, next) => {
   }
 };
 
+// ✔️ get individual note
+export const getIndividualNote = async (req, res, next) => {
+  progressMessage('Fetching individual note');
+
+  const { noteId } = req.params;
+  console.log(noteId);
+  try {
+    // const note = await Note.find({ _id: noteId });
+    const note = await Note.findById(noteId);
+
+    successMessage('Note fetching successful');
+    res.status(200).json({ success: true, note });
+  } catch (error) {
+    errorMessage("Couldn't fetch note ");
+    next(error);
+  }
+};
+
 // ✔️ delete a note controller
 export const deleteNote = async (req, res, next) => {
   progressMessage('User requested to delete a note');
