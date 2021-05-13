@@ -9,7 +9,7 @@
 import axios from 'axios';
 import { formatDistance } from 'date-fns';
 import React, { useEffect, useState } from 'react';
-import { FaStar, FaTrash } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
 import { useParams } from 'react-router';
 import { Loader, SingleTagName } from '.';
 
@@ -63,11 +63,9 @@ const NoteDetails = () => {
         </span>
 
         <div className="flex justify-end text-gray-400 col-span-1 self-end">
-          <span className="rounded-full cursor-pointer hover:text-electromagnatic inline-block px-1 py-1 mr-2 hover:bg-gray-300 ">
+          {}
+          <span className="rounded-full cursor-pointer hover:text-electromagnatic inline-block px-1 py-1 ml-2 hover:bg-gray-300 ">
             <FaStar />
-          </span>
-          <span className="rounded-full cursor-pointer hover:text-electromagnatic inline-block px-1 py-1 mr-2 hover:bg-gray-300 ">
-            <FaTrash />
           </span>
         </div>
       </div>

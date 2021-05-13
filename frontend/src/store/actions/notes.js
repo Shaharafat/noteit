@@ -78,7 +78,7 @@ export const createNewNote = async (dispatch, body) => {
 };
 
 // ✔️ delete a note
-export const deleteSingleNote = async (dispatch, id) => {
+export const deleteSingleNote = async (dispatch, id, setLoading) => {
   try {
     const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/notes/delete/${id}`, {
       headers: { x_auth_token: localStorage.getItem('x_auth_token') },
@@ -88,6 +88,7 @@ export const deleteSingleNote = async (dispatch, id) => {
 
     // if success, delete from store
     if (success) {
+      setLoading(false);
       dispatch({ type: DELETE_SINGLE_NOTE, payload: { id } });
       console.log('deleted');
     }
