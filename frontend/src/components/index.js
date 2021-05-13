@@ -5,6 +5,7 @@ import RegisterForm from './auth/RegisterForm';
 import ResetPassword from './auth/ResetPassword';
 import Button from './common/Button';
 import Layout from './common/Layout';
+import Loader from './common/Loader';
 import Navbar from './common/Navbar';
 import useResponseBox from './common/useResponseBox';
 import DashboardSidebar from './DashboardSidebar';
@@ -40,4 +41,5 @@ export {
   NoteDetails,
   SingleNote,
   SingleTagName,
+  Loader,
 };

@@ -10,6 +10,7 @@
 import {
   ADD_NEW_NOTE,
   ADD_NEW_TAG,
+  DELETE_SINGLE_NOTE,
   GET_ALL_NOTES,
   GET_ALL_TAGS,
   LOADING_END,
@@ -52,6 +53,10 @@ export const reducer = (state, action) => {
     }
     case ADD_NEW_TAG: {
       return { ...state, tags: [...state.tags, ...action.payload.tags] };
+    }
+    case DELETE_SINGLE_NOTE: {
+      const { id } = action.payload;
+      return { ...state, notes: state.notes.filter((note) => note._id !== id) };
     }
     default: {
       return state;

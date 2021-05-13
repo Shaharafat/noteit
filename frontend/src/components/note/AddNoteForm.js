@@ -24,17 +24,17 @@ const AddNoteForm = () => {
   } = validateSchema(addNoteSchema);
 
   // execute when form submits
-  const submitNewNote = (data) => {
+  const submitNewNote = async (data) => {
     setLoading(true);
     // make tag array
     data.tags = data.tags.split(',');
 
     data = { ...data, details: note, user: state.user.id };
-    console.log(data);
-    const response = createNewNote(dispatch, data);
+    const response = await createNewNote(dispatch, data);
     if (response.success) {
       console.log('successfull');
     }
+
     setLoading(false);
   };
 

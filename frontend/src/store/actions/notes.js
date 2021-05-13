@@ -8,7 +8,7 @@
  */
 
 import axios from 'axios';
-import { ADD_NEW_NOTE, ADD_NEW_TAG, GET_ALL_NOTES } from '../constants';
+import { ADD_NEW_NOTE, ADD_NEW_TAG, DELETE_SINGLE_NOTE, GET_ALL_NOTES } from '../constants';
 
 // TODO: cancel token
 // ✔️ search users notes by tag name
@@ -74,5 +74,27 @@ export const createNewNote = async (dispatch, body) => {
   } catch (error) {
     const { success } = error.response?.data;
     return success;
+  }
+};
+
+// ✔️ delete a note
+export const deleteSingleNote = async (dispatch, id) => {
+  try {
+    const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/notes/delete/${id}`, {
+      headers: { x_auth_token: localStorage.getItem('x_auth_token') },
+    });
+
+    const { success, message } = response.data;
+
+    // if success, delete from store
+    if (success) {
+      dispatch({ type: DELETE_SINGLE_NOTE, payload: { id } });
+      console.log('deleted');
+    }
+
+    return { success, message };
+  } catch (error) {
+    const { success, message } = error.response?.data;
+    return { success, message };
   }
 };

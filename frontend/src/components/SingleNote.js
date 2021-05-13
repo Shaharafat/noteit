@@ -8,14 +8,26 @@
  */
 
 import { formatDistance } from 'date-fns';
-import React from 'react';
-import { FaStar, FaTrash } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { SingleTagName } from '.';
+import loader from '../icons/ball-loader.svg';
+import { deleteSingleNote } from '../store/actions/notes';
+import { useStore } from '../store/Store';
 
 const SingleNote = ({ note: { _id: id, title, tags, createdAt } }) => {
   // format date
   const noteCreationDate = formatDistance(new Date(createdAt), new Date(), { addSuffix: true });
+  const [loading, setLoading] = useState(false);
+  const { dispatch } = useStore();
+
+  // this will execute when trash icon clicked
+  const deleteNote = async (id) => {
+    setLoading(true);
+    await deleteSingleNote(dispatch, id);
+    setLoading(false);
+  };
 
   return (
     <div className="w-full rounded-md bg-white p-3 my-2 shadow-md">
@@ -33,10 +45,12 @@ const SingleNote = ({ note: { _id: id, title, tags, createdAt } }) => {
         </div>
 
         <div className="flex justify-end text-gray-400 col-span-1 self-end">
-          <span className="rounded-full cursor-pointer hover:text-electromagnatic inline-block px-1 py-1 mr-2 hover:bg-gray-300 ">
-            <FaStar />
-          </span>
-          <span className="rounded-full cursor-pointer hover:text-electromagnatic inline-block px-1 py-1 mr-2 hover:bg-gray-300 ">
+          {loading && <img src={loader} alt="delete loader" className="w-5" />}
+
+          <span
+            className="rounded-full cursor-pointer hover:text-electromagnatic inline-block px-1 py-1 ml-2 hover:bg-gray-300 "
+            onClick={() => deleteNote(id)}
+          >
             <FaTrash />
           </span>
         </div>

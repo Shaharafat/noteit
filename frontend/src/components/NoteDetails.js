@@ -11,19 +11,20 @@ import { formatDistance } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import { FaStar, FaTrash } from 'react-icons/fa';
 import { useParams } from 'react-router';
-import { SingleTagName } from '.';
-import loader from '../icons/loader.svg';
+import { Loader, SingleTagName } from '.';
 
 const NoteDetails = () => {
   const { noteId } = useParams();
   const [noteDetails, setNoteDetails] = useState();
   const [loading, setLoading] = useState(false);
 
+  // format date using date-fns
   const formatDate = (date) => {
     return formatDistance(new Date(date), new Date(), { addSuffix: true });
   };
 
   useEffect(() => {
+    // ⚠️ get note details from server
     let getNote = async () => {
       setLoading(true);
       try {
@@ -52,9 +53,7 @@ const NoteDetails = () => {
   }, []);
 
   return loading ? (
-    <div className="w-full min-h-screen grid place-items-center">
-      <img src={loader} className="w-12" />
-    </div>
+    <Loader />
   ) : (
     <div className="min-h-screen max-h-screen overflow-y-auto">
       <h1 className="text-4xl font-bold font-railway mt-6">{noteDetails?.title}</h1>
