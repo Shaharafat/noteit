@@ -6,17 +6,23 @@
  * Date: 11-05-2021
  *
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, SingleNote } from '.';
+import { getNotesByTitle } from '../store/actions/notes';
 import { useStore } from '../store/Store';
 
 const NotesList = () => {
+  const [searchText, setSearchText] = useState('');
+  const { dispatch } = useStore();
   const {
     state: { notes },
   } = useStore();
 
-  const searchNote = () => {
+  const searchNote = async (e) => {
+    e.preventDefault();
     console.log('notes');
+    console.log(searchText);
+    await getNotesByTitle(searchText, dispatch);
   };
 
   return (
@@ -28,16 +34,24 @@ const NotesList = () => {
             type="text"
             autoComplete="off"
             className="px-4 py-2 rounded-full bg-gray-200 focus:outline-none w-full"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
             placeholder="Search by name"
           />
         </form>
       </div>
       {/* All notes here */}
       <div>
-        <h1 className="text-electromagnatic font-bold font-railway text-2xl mt-2">Notes</h1>
-        {notes.map((note) => (
-          <SingleNote key={note._id} note={note} />
-        ))}
+        {notes.length > 0 ? (
+          <>
+            <h1 className="text-electromagnatic font-bold font-railway text-2xl mt-2">Notes</h1>
+            {notes.map((note) => (
+              <SingleNote key={note._id} note={note} />
+            ))}
+          </>
+        ) : (
+          <h2>No notes found. </h2>
+        )}
       </div>
 
       <Button

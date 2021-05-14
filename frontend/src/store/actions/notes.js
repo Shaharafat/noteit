@@ -10,16 +10,13 @@
 import axios from 'axios';
 import { ADD_NEW_NOTE, ADD_NEW_TAG, DELETE_SINGLE_NOTE, GET_ALL_NOTES } from '../constants';
 
-// TODO: cancel token
 // ✔️ search users notes by tag name
-export const getNotesByTag = async (tag, id, dispatch) => {
-  console.log(tag, id);
+export const getNotesByTag = async (tag, dispatch) => {
   try {
     const response = await axios.post(
       `${process.env.REACT_APP_SERVER_URL}/notes/searchNotes`,
       {
         tag,
-        id,
       },
       { headers: { x_auth_token: localStorage.getItem('x_auth_token') } }
     );
@@ -36,6 +33,31 @@ export const getNotesByTag = async (tag, id, dispatch) => {
   }
 };
 
+// ✔️ search users notes by title
+export const getNotesByTitle = async (title, dispatch) => {
+  try {
+    const response = await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/notes/searchByTitle`,
+      {
+        title,
+      },
+      { headers: { x_auth_token: localStorage.getItem('x_auth_token') } }
+    );
+
+    const { success, notes } = response.data;
+    if (success) {
+      // if fetching successful then populate store
+      dispatch({ type: GET_ALL_NOTES, payload: { notes } });
+    }
+    return { success };
+  } catch (error) {
+    // const { success, message } = error.response?.data;
+    // return { success, message };
+    console.log(error.response);
+  }
+};
+
+// ✔️ get all notes
 export const getAllNotes = async (dispatch, id) => {
   try {
     const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/notes/${id}`, {

@@ -21,19 +21,21 @@ const SingleNote = ({ note: { _id: id, title, tags, createdAt } }) => {
   const noteCreationDate = formatDistance(new Date(createdAt), new Date(), { addSuffix: true });
   const [loading, setLoading] = useState(false);
   const { dispatch } = useStore();
-  // const [loadingIcon, setLoadingIcon] = useState('');
 
   useEffect(() => {
     // load loader icon asynchronously
     (async () => {
-      const loadIcon = async () => {
-        const loadImg = new Image();
-        loadImg.src = loader;
-        loadImg.onload = () => {
-          console.log('loaded');
-        };
-      };
+      const loadIcon = () =>
+        new Promise((resolve) => {
+          const loadImg = new Image();
+          loadImg.src = loader;
+          loadImg.onload = () => {
+            console.log('loaded-log');
+            resolve('loaded');
+          };
+        });
 
+      // load loader icon
       await loadIcon();
     })();
   }, []);
@@ -63,7 +65,7 @@ const SingleNote = ({ note: { _id: id, title, tags, createdAt } }) => {
           {loading && <img src={loader} alt="delete loader" className="w-6" />}
 
           <span
-            className="rounded-full cursor-pointer hover:text-electromagnatic inline-block px-1 py-1 ml-1 hover:bg-gray-300 "
+            className="rounded-full cursor-pointer hover:text-red-600 inline-block px-1 py-1 ml-1 hover:bg-red-300 "
             onClick={() => deleteNote(id)}
           >
             <FaTrash />

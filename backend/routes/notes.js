@@ -7,7 +7,14 @@
  *
  */
 import express from 'express';
-import { createNote, deleteNote, getIndividualNote, getSearchedNotes, getUserNotes } from '../controllers/note.js';
+import {
+  createNote,
+  deleteNote,
+  getIndividualNote,
+  getPostByTitle,
+  getSearchedNotes,
+  getUserNotes,
+} from '../controllers/note.js';
 import { isAuthenticated } from '../middlewares/auth.js';
 import validate from '../middlewares/validate.js';
 import { validateNote } from '../models/note.js';
@@ -25,6 +32,9 @@ router.post('/newNote', [isAuthenticated, validate(validateNote)], createNote);
 
 // get notes by tag
 router.post('/searchNotes', isAuthenticated, getSearchedNotes);
+
+// get notes by name search
+router.post('/searchByTitle', isAuthenticated, getPostByTitle);
 
 // delete a note
 router.delete('/delete/:noteId', isAuthenticated, deleteNote);

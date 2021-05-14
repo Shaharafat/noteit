@@ -19,12 +19,11 @@ import {
   LOGOUT_USER,
 } from './constants';
 
-// initial states
 export const initialState = {
-  loading: true,
   user: null,
   notes: [],
   tags: [],
+  loading: false,
 };
 
 // reducer function. this will be passed in useReducer.

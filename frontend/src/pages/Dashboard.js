@@ -6,8 +6,8 @@
  *
  */
 import React from 'react';
-import { Navbar, NotesList } from '../components';
-import DashboardRightSection from '../components/DashboardRightSection';
+import { Route, Switch } from 'react-router';
+import { AddNoteForm, Navbar, NoteDetails, NotesList } from '../components';
 
 const Dashboard = () => {
   return (
@@ -20,7 +20,10 @@ const Dashboard = () => {
           <NotesList />
         </div>
         <div className="col-span-5 lg:col-span-6">
-          <DashboardRightSection />
+          <Switch>
+            <Route path="/dashboard/newNote" component={AddNoteForm} />
+            <Route path={`/dashboard/note/:noteId`} component={NoteDetails} />
+          </Switch>
         </div>
       </section>
     </>

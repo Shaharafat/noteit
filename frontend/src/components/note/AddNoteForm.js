@@ -7,6 +7,7 @@
  *
  */
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Button, Editor, TagManager } from '..';
 import { addNoteSchema, validateSchema } from '../../helpers/schemas';
 import { createNewNote } from '../../store/actions/notes';
@@ -39,7 +40,11 @@ const AddNoteForm = () => {
   };
 
   return (
-    <div className="w-full mt-6">
+    <div className="w-full mt-6 px-3">
+      <Helmet>
+        <title>New Note | Noteit</title>
+      </Helmet>
+
       <h1 className="text-electromagnatic font-bold font-railway text-2xl mt-2">Create New Note</h1>
       <form onSubmit={handleSubmit(submitNewNote)} className="mt-3">
         <div className="flex flex-col">
@@ -60,9 +65,9 @@ const AddNoteForm = () => {
         </div>
         {/* note editor */}
         <Editor note={note} setNote={setNote} />
+
         {/* tags */}
         <TagManager register={register} errors={errors} />
-        {/* TODO: color option */}
 
         {/* submit */}
         <Button medium="true" disabled={loading}>

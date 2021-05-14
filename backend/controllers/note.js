@@ -171,12 +171,32 @@ export const deleteNote = async (req, res, next) => {
 export const getSearchedNotes = async (req, res, next) => {
   progressMessage('Request to get notes by tag name');
 
-  const { tag, id } = req.body;
+  const { tag } = req.body;
   try {
     progressMessage('Searching notes');
 
     // ! very important to know the regex style
-    const notes = await Note.find({ user: { _id: id }, tags: `${tag}` });
+    const notes = await Note.find({ tags: `${tag}` });
+
+    successMessage('Notes fetching done.');
+    res.status(200).json({ success: true, notes });
+    next();
+  } catch (error) {
+    errorMessage('Notes fetching failed.');
+    next(error);
+  }
+};
+
+// ✔️ get post by title name
+export const getPostByTitle = async (req, res, next) => {
+  progressMessage('Request to get notes by name');
+
+  const { title } = req.body;
+  try {
+    progressMessage('Searching notes');
+
+    // ! very important to know the regex style
+    const notes = await Note.find({ title: { $regex: `${title}`, $options: 'ig' } });
 
     successMessage('Notes fetching done.');
     res.status(200).json({ success: true, notes });

@@ -8,7 +8,6 @@ import Layout from './common/Layout';
 import Loader from './common/Loader';
 import Navbar from './common/Navbar';
 import useResponseBox from './common/useResponseBox';
-import DashboardSidebar from './DashboardSidebar';
 import HomeLeftPanel from './HomeLeftPanel';
 import HomeRightPanel from './HomeRightPanel';
 import AddNoteForm from './note/AddNoteForm';
@@ -32,7 +31,6 @@ export {
   ResetPassword,
   Navbar,
   Layout,
-  DashboardSidebar,
   AddNoteForm,
   Editor,
   TagManager,
