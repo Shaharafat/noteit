@@ -72,12 +72,14 @@ const NoteDetails = () => {
   return loading ? (
     <Loader loader={loader} />
   ) : (
-    <div className="min-h-screen max-h-screen overflow-y-auto px-3">
+    <div className="min-h-screen max-h-screen bg-white dark:bg-wetEsphalt overflow-y-auto px-3">
       <Helmet>
         <title>{`${noteDetails?.title} | Noteit`} </title>
       </Helmet>
 
-      <h1 className="text-4xl font-bold font-railway mt-6">{noteDetails?.title}</h1>
+      <h1 className="text-4xl font-bold font-railway mt-6 text-electromagnatic dark:text-antiFlashWhite ">
+        {noteDetails?.title}
+      </h1>
       <div className="flex justify-between">
         <span className="text-gray-400 font-railway">
           {noteDetails && formatDate(noteDetails?.createdAt)}
@@ -98,7 +100,10 @@ const NoteDetails = () => {
       </div>
 
       {/* main text */}
-      <div className="prose mt-4" dangerouslySetInnerHTML={{ __html: noteDetails?.details }}></div>
+      <div
+        className="prose dark:prose-dark mt-4"
+        dangerouslySetInnerHTML={{ __html: noteDetails?.details }}
+      ></div>
     </div>
   );
 };

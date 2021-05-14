@@ -47,9 +47,9 @@ const SingleNote = ({ note: { _id: id, title, tags, createdAt } }) => {
   };
 
   return (
-    <div className="w-full rounded-md bg-white p-3 my-2 shadow-md">
-      <Link to={`/dashboard/note/${id}`} className="hover:underline">
-        <h1 className="text-xl font-bold text-electromagnatic">{title}</h1>
+    <div className="w-full rounded-md bg-white dark:bg-wetEsphalt p-3 my-2 shadow-md">
+      <Link to={`/dashboard/note/${id}`} className="hover:underline dark:hover:text-antiFlashWhite">
+        <h1 className="text-xl font-bold text-electromagnatic dark:text-white">{title}</h1>
       </Link>
 
       <span className="text-gray-400 text-sm">{noteCreationDate}</span>
