@@ -23,7 +23,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "tailwindcss": "^2.1.2"
   },
   "scripts": {
     "start": "craco start",
@@ -58,6 +59,5 @@
     "eslint-plugin-react": "^7.23.1",
     "postcss": "7",
     "prettier": "^2.2.1",
-    "tailwindcss": "^2.1.2"
   }
 }
