@@ -14,6 +14,7 @@ import express from 'express';
 import Joi from 'joi';
 import objectid from 'joi-objectid';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import initialiseDB from './db/dbConfig.js';
 import { debugServer } from './helpers/debugHelpers.js';
 import errorMiddleware from './middlewares/error.js';
@@ -21,6 +22,9 @@ import errorMiddleware from './middlewares/error.js';
 import noteRouter from './routes/notes.js';
 import tagRouter from './routes/tags.js';
 import userRouter from './routes/users.js';
+
+// we need to change up how __dirname is used for ES6 purposes
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // load .env files
 dotenv.config();
 
