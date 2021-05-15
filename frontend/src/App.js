@@ -1,22 +1,26 @@
 import React from 'react';
+import 'react-quill/dist/quill.snow.css';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { Dashboard, Home } from './pages';
-import HomeRoute from './routes/HomeRoute';
 import PrivateRoute from './routes/PrivateRoute';
+import RedirectRoute from './routes/RedirectRoute';
 import { StoreProvider } from './store/Store';
-import 'react-quill/dist/quill.snow.css';
 
 function App() {
   return (
     <StoreProvider>
       <Router>
         <Switch>
-          <HomeRoute exact path="/">
+          <RedirectRoute exact path="/">
             <Redirect to="/home" />
-          </HomeRoute>
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <Route path="/home" component={Home} />
+          </RedirectRoute>
+          <PrivateRoute path="/dashboard">
+            <Dashboard />
+          </PrivateRoute>
+          <Route path="/home">
+            <Home />
+          </Route>
         </Switch>
       </Router>
     </StoreProvider>

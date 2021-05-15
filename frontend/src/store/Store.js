@@ -7,13 +7,10 @@
  *
  */
 
-import jwt_decode from 'jwt-decode';
 import { createContext, useContext, useEffect, useReducer } from 'react';
-import { Redirect } from 'react-router-dom';
+import { RootLoader } from '../components';
+import { authenticateAndFetchData } from '../helpers/fetchData';
 import { setThemeToRoot } from '../helpers/themes';
-import { getAllNotes } from './actions/notes';
-import { getAllTags } from './actions/tags';
-import { LOADING_END, LOGIN_USER, LOGOUT_USER } from './constants';
 import { initialState, reducer } from './reducer';
 
 // create store context
@@ -31,35 +28,10 @@ export const StoreProvider = ({ children }) => {
     // set theme
     setThemeToRoot();
 
-    // check user
-    let hasToken = localStorage.getItem('x_auth_token');
-    // verify token
-    if (hasToken?.startsWith('Bearer')) {
-      const [, token] = hasToken.split(' ');
-      // deccode token
-      const { user, exp } = jwt_decode(token);
-
-      // check expirity.
-      if (exp > Date.now() / 1000) {
-        dispatch({ type: LOGIN_USER, payload: { user } });
-
-        // get all notes of this user
-        getAllNotes(dispatch, user.id);
-
-        // fetch all tags data
-        getAllTags(dispatch);
-
-        // if logged in . goto dashboard
-        <Redirect to="/dashboard" />;
-        dispatch({ type: LOADING_END });
-      } else {
-        // remove token
-        localStorage.removeItem('x_auth_token');
-        dispatch({ type: LOGOUT_USER });
-        dispatch({ type: LOADING_END });
-      }
-    }
-    dispatch({ type: LOADING_END });
+    // load user and fetch data
+    (async () => {
+      await authenticateAndFetchData(dispatch);
+    })();
   }, []);
 
   console.log(state);
@@ -69,8 +41,6 @@ export const StoreProvider = ({ children }) => {
   };
 
   return (
-    <Store.Provider value={storeValue}>
-      {!state.loading ? children : <p>Loading...</p>}
-    </Store.Provider>
+    <Store.Provider value={storeValue}>{state.loading ? <RootLoader /> : children}</Store.Provider>
   );
 };

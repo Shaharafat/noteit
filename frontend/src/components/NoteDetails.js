@@ -27,17 +27,6 @@ const NoteDetails = () => {
 
   useEffect(() => {
     (async () => {
-      // load loader icon asynchronously
-      const loadIcon = () =>
-        new Promise((resolve) => {
-          const loadImg = new Image();
-          loadImg.src = loader;
-          loadImg.onload = () => {
-            console.log('loaded-log');
-            resolve('loaded in notedetails');
-          };
-        });
-
       // ⚠️ get note details from server
       let getNote = async () => {
         try {
@@ -59,11 +48,8 @@ const NoteDetails = () => {
         }
       };
 
-      setLoading(true);
-      // load icon
-      await loadIcon();
-
       // fetch note data
+      setLoading(true);
       await getNote();
       setLoading(false);
     })();

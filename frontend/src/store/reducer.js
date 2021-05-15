@@ -23,7 +23,7 @@ export const initialState = {
   user: null,
   notes: [],
   tags: [],
-  loading: false,
+  loading: true,
 };
 
 // reducer function. this will be passed in useReducer.

@@ -6,7 +6,7 @@
  * Date: 21-04-2021
  *
  */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import btnLoader from '../../icons/buttonLoader.svg';
 
@@ -27,20 +27,6 @@ const Button = ({
   danger,
   disabled,
 }) => {
-  useEffect(() => {
-    (async () => {
-      const loadIcon = async () => {
-        const loadImg = new Image();
-        loadImg.src = btnLoader;
-        loadImg.onload = () => {
-          console.log('btn loader loaded');
-        };
-      };
-
-      await loadIcon();
-    })();
-  });
-
   return linkButton ? (
     <Link
       to={`${to}`}

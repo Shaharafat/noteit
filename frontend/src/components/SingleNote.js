@@ -8,7 +8,7 @@
  */
 
 import { formatDistance } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { SingleTagName } from '.';
@@ -17,30 +17,12 @@ import { deleteSingleNote } from '../store/actions/notes';
 import { useStore } from '../store/Store';
 
 const SingleNote = ({ note: { _id: id, title, tags, createdAt } }) => {
-  // format date
+  // 🔧 format date
   const noteCreationDate = formatDistance(new Date(createdAt), new Date(), { addSuffix: true });
   const [loading, setLoading] = useState(false);
   const { dispatch } = useStore();
 
-  useEffect(() => {
-    // load loader icon asynchronously
-    (async () => {
-      const loadIcon = () =>
-        new Promise((resolve) => {
-          const loadImg = new Image();
-          loadImg.src = loader;
-          loadImg.onload = () => {
-            console.log('loaded-log');
-            resolve('loaded');
-          };
-        });
-
-      // load loader icon
-      await loadIcon();
-    })();
-  }, []);
-
-  // this will execute when trash icon clicked
+  // ⚙️ this will execute when trash icon clicked
   const deleteNote = async (id) => {
     setLoading(true);
     await deleteSingleNote(dispatch, id, setLoading);

@@ -21,16 +21,6 @@ const AuthSection = () => {
       <Button to="/home/login" full={true} large={true} pill={true} linkButton={true}>
         Login
       </Button>
-      <Button
-        to="/home/signup"
-        primary={true}
-        large={true}
-        full={true}
-        pill={true}
-        linkButton={true}
-      >
-        Signup
-      </Button>
     </>
   );
 };

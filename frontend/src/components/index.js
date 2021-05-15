@@ -7,6 +7,7 @@ import Button from './common/Button';
 import Layout from './common/Layout';
 import Loader from './common/Loader';
 import Navbar from './common/Navbar';
+import RootLoader from './common/RootLoader';
 import useResponseBox from './common/useResponseBox';
 import HomeLeftPanel from './HomeLeftPanel';
 import HomeRightPanel from './HomeRightPanel';
@@ -40,4 +41,5 @@ export {
   SingleNote,
   SingleTagName,
   Loader,
+  RootLoader,
 };

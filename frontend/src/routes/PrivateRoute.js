@@ -10,9 +10,9 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { useStore } from '../store/Store';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ children, ...rest }) => {
   const { state } = useStore();
-  return <Route {...rest} render={() => (state.user ? <Component /> : <Redirect to="/" />)} />;
+  return <Route {...rest} render={() => (state.user ? children : <Redirect to="/" />)} />;
 };
 
 export default PrivateRoute;
