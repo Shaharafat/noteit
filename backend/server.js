@@ -13,15 +13,14 @@ import dotenv from 'dotenv';
 import express from 'express';
 import Joi from 'joi';
 import objectid from 'joi-objectid';
+import path from 'path';
 import initialiseDB from './db/dbConfig.js';
 import { debugServer } from './helpers/debugHelpers.js';
 import errorMiddleware from './middlewares/error.js';
-
 // router
 import noteRouter from './routes/notes.js';
 import tagRouter from './routes/tags.js';
 import userRouter from './routes/users.js';
-
 // load .env files
 dotenv.config();
 
@@ -45,6 +44,17 @@ app.use(errorMiddleware);
 app.get('/', (req, res) => {
   res.send('Assalamu alaikum');
 });
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+  });
+} else {
+  app.get('/', (req, res) => {
+    res.send('API running');
+  });
+}
 
 // server listen
 const port = process.env.PORT || 5000;
