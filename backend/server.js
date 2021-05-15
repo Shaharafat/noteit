@@ -41,10 +41,6 @@ app.use('/tags', tagRouter);
 // error middleware
 app.use(errorMiddleware);
 
-app.get('/', (req, res) => {
-  res.send('Assalamu alaikum');
-});
-
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')));
   app.get('*', (req, res) => {
