@@ -4,8 +4,10 @@ node_modules/
 
 # environment variables
 .env
-.env.local
+frontend/.env.local
+# frontend/.env
+frontend/build
 
 ## production
-./client/build
-./client/dist
+./frontend/build
+./frontend/dist
