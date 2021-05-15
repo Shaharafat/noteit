@@ -10,14 +10,13 @@
     "server": "nodemon backend/server.js",
     "client": "yarn start --prefix frontend",
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn install --prefix frontend && yarn run build --prefix frontend"
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn install --prefix frontend && cd frontend && yarn run build"
   },
   "engines": {
     "node": "14.16.0"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.4.2",
-    "autoprefixer": "^10.2.5",
     "bcrypt": "^5.0.1",
     "colors": "^1.4.0",
     "concurrently": "^6.0.0",
@@ -31,8 +30,7 @@
     "express-async-errors": "^3.1.1",
     "joi-objectid": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.2",
-    "prettier": "^2.2.1"
+    "mongoose": "^5.12.2"
   },
   "devDependencies": {
     "eslint-config-airbnb": "18.2.1",
