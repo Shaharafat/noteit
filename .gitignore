@@ -3,9 +3,11 @@ node_modules
 node_modules/
 
 # environment variables
-./.env
-./frontend/.env.local
+.env
+frontend/.env.local
+# frontend/.env
+frontend/build
 
 ## production
-./client/build
-./client/dist
+./frontend/build
+./frontend/dist
