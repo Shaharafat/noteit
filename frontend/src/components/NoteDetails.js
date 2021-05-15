@@ -30,10 +30,9 @@ const NoteDetails = () => {
       // ⚠️ get note details from server
       let getNote = async () => {
         try {
-          const response = await axios.get(
-            `${process.env.REACT_APP_SERVER_URL}/notes/get/${noteId}`,
-            { headers: { x_auth_token: localStorage.getItem('x_auth_token') } }
-          );
+          const response = await axios.get(`/notes/get/${noteId}`, {
+            headers: { x_auth_token: localStorage.getItem('x_auth_token') },
+          });
 
           const { success, note } = response.data;
 

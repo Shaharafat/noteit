@@ -14,7 +14,7 @@ import { ADD_NEW_NOTE, ADD_NEW_TAG, DELETE_SINGLE_NOTE, GET_ALL_NOTES } from '..
 export const getNotesByTag = async (tag, dispatch) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/notes/searchNotes`,
+      `/notes/searchNotes`,
       {
         tag,
       },
@@ -37,7 +37,7 @@ export const getNotesByTag = async (tag, dispatch) => {
 export const getNotesByTitle = async (title, dispatch) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/notes/searchByTitle`,
+      `/notes/searchByTitle`,
       {
         title,
       },
@@ -60,7 +60,7 @@ export const getNotesByTitle = async (title, dispatch) => {
 // ✔️ get all notes
 export const getAllNotes = async (dispatch, id) => {
   try {
-    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/notes/${id}`, {
+    const response = await axios.get(`/notes/${id}`, {
       headers: { x_auth_token: localStorage.getItem('x_auth_token') },
     });
 
@@ -79,7 +79,7 @@ export const getAllNotes = async (dispatch, id) => {
 // ✔️ create new note
 export const createNewNote = async (dispatch, body) => {
   try {
-    const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/notes/newNote`, body, {
+    const response = await axios.post(`/notes/newNote`, body, {
       headers: { x_auth_token: localStorage.getItem('x_auth_token') },
     });
 
@@ -102,7 +102,7 @@ export const createNewNote = async (dispatch, body) => {
 // ✔️ delete a note
 export const deleteSingleNote = async (dispatch, id, setLoading) => {
   try {
-    const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/notes/delete/${id}`, {
+    const response = await axios.delete(`/notes/delete/${id}`, {
       headers: { x_auth_token: localStorage.getItem('x_auth_token') },
     });
 

@@ -15,7 +15,7 @@ import { getAllTags } from './tags';
 // ✔️ signup and update store
 export const signupUser = async (body, dispatch) => {
   try {
-    const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/register`, body);
+    const response = await axios.post(`/users/register`, body);
     const { success, token, message } = response.data;
 
     if (success) {
@@ -63,10 +63,7 @@ export const loginUser = async (body, dispatch) => {
 // ✔️ reset password
 export const sendResetEmail = async (body) => {
   try {
-    const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/users/forgotpassword`,
-      body
-    );
+    const response = await axios.post(`/users/forgotpassword`, body);
     const { success, message } = response.data;
 
     // send success or error message
@@ -84,10 +81,7 @@ export const sendResetEmail = async (body) => {
 export const setPassword = async (resetToken, password, dispatch) => {
   try {
     // send request with reset token
-    const response = await axios.put(
-      `${process.env.REACT_APP_SERVER_URL}/users/resetpassword/${resetToken}`,
-      { password }
-    );
+    const response = await axios.put(`/users/resetpassword/${resetToken}`, { password });
     const { success, token, message } = response.data;
 
     if (success) {
