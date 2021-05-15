@@ -6,10 +6,10 @@
   "author": "Shah Arafat",
   "license": "MIT",
   "scripts": {
-    "start": "node ./backend/server.js",
+    "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
-    "client": "yarn start --prefix frontend",
-    "dev": "concurrently \"yarn run server\" \"yarn run client\"",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd frontend && npm install && npm run build"
   },
   "engines": {
@@ -28,10 +28,12 @@
     "eslint-plugin-prettier": "^3.3.1",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
+    "global": "^4.4.0",
     "joi": "^17.4.0",
     "joi-objectid": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.2"
+    "mongoose": "^5.12.2",
+    "nodemon": "^2.0.7"
   },
   "devDependencies": {
     "eslint-config-airbnb": "18.2.1",

@@ -23,6 +23,7 @@ import noteRouter from './routes/notes.js';
 import tagRouter from './routes/tags.js';
 import userRouter from './routes/users.js';
 
+
 // we need to change up how __dirname is used for ES6 purposes
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // load .env files
@@ -46,9 +47,9 @@ app.use('/tags', tagRouter);
 app.use(errorMiddleware);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '/frontend/build')));
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'build', 'index.html'));
   });
 } else {
   app.get('/', (req, res) => {
