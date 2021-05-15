@@ -10,7 +10,7 @@
     "server": "nodemon backend/server.js",
     "client": "yarn start --prefix frontend",
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn install --prefix frontend && cd frontend && yarn run build"
+    "heroku-postbuild": "YARN_PRODUCTION=false cd frontend && yarn install && yarn run build"
   },
   "engines": {
     "node": "14.16.0"
