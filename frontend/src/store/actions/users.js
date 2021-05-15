@@ -36,7 +36,7 @@ export const signupUser = async (body, dispatch) => {
 // ✔️ login user
 export const loginUser = async (body, dispatch) => {
   try {
-    const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/login`, body);
+    const response = await axios.post(`/users/login`, body);
     const { success, token, message } = response.data;
 
     if (success) {

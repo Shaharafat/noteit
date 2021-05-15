@@ -22,8 +22,6 @@ import errorMiddleware from './middlewares/error.js';
 import noteRouter from './routes/notes.js';
 import tagRouter from './routes/tags.js';
 import userRouter from './routes/users.js';
-
-
 // we need to change up how __dirname is used for ES6 purposes
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // load .env files
@@ -61,4 +59,5 @@ if (process.env.NODE_ENV === 'production') {
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   debugServer(colors.green(`👋 Connected to the port ${port} 🚀`));
+  console.log(`Server is connected to the port ${port}`);
 });
