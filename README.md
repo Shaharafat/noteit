@@ -20,7 +20,7 @@ Main note saved as HTML, then I inject it in HTML. All notes content designed wi
 
 ----
 
-##Technology Used
+## Technology Used
 - React
 - React router
 - Express
@@ -31,4 +31,4 @@ Main note saved as HTML, then I inject it in HTML. All notes content designed wi
 - JWT
 - Tailwind typography
 
-###[Live Site](https://noteit-arafat.herokuapp.com/)
+### [Live Site](https://noteit-arafat.herokuapp.com/)
