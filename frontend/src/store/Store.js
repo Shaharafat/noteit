@@ -34,7 +34,6 @@ export const StoreProvider = ({ children }) => {
     })();
   }, []);
 
-  console.log(state);
   const storeValue = {
     state,
     dispatch,

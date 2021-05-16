@@ -15,32 +15,6 @@ import ErrorResponse from '../utils/errorResponse.js';
 export const createNote = async (req, res, next) => {
   progressMessage('Creating new note.');
   const { title, details, tags, user } = req.body;
-
-  //  this function add new tags to tag model
-  // const updateTagList = (noteTags) => {
-  //   noteTags.forEach(async (tag) => {
-  //     const hasTag = await Tag.findOne({ name: tag });
-  //     progressMessage('Finding matching tag');
-
-  //     if (!hasTag) {
-  //       progressMessage('Tag doesn"t exist, Adding new tag');
-  //       try {
-  //         const newTag = new Tag({ name: tag, noteCount: 1 });
-  //         await newTag.save();
-
-  //         successMessage(`New tag added - ${tag}`);
-  //       } catch (error) {
-  //         next(error);
-  //       }
-  //     } else {
-  //       progressMessage('Tag already exists, so updating count');
-
-  //       const updateTag = await Tag.findOneAndUpdate({ name: tag }, { $inc: { noteCount: +1 } });
-  //       await updateTag.save();
-  //       successMessage(`Note count updated for ${tag}`);
-  //     }
-  //   });
-  // };
   const updateTagList = async (noteTags) => {
     // this will store the absolutely new tags.
     const newTags = [];
@@ -125,7 +99,6 @@ export const getIndividualNote = async (req, res, next) => {
   progressMessage('Fetching individual note');
 
   const { noteId } = req.params;
-  console.log(noteId);
   try {
     // const note = await Note.find({ _id: noteId });
     const note = await Note.findById(noteId);

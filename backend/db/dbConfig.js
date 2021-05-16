@@ -5,7 +5,7 @@ import { debugDB } from '../helpers/debugHelpers.js';
 
 dotenv.config();
 
-// connect mongoose
+// ⚙️ connect mongoose
 const initialiseDB = () => {
   mongoose
     .connect(process.env.MONGODB_URI, {

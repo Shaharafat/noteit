@@ -29,7 +29,7 @@ export const searchTags = async (req, res, next) => {
   progressMessage('Request to search a tag.');
 
   const { search } = req.body;
-  console.log(search);
+
   // make a regex query to mongodb
   try {
     const tags = await Tag.find({ name: { $regex: `^${search}`, $options: 'i' } });
