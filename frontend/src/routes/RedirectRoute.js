@@ -12,7 +12,7 @@ import { useStore } from '../store/Store';
 
 const RedirectRoute = ({ children, ...rest }) => {
   const { state } = useStore();
-  console.log(state);
+
   return <Route {...rest} render={() => (state.user ? <Redirect to="/dashboard" /> : children)} />;
 };
 

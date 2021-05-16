@@ -7,7 +7,7 @@
  *
  */
 
-// ? loading constants
+// loading constants
 export const LOADING_START = 'LOADING_START';
 export const LOADING_END = 'LOADING_END';
 export const LOGIN_USER = 'LOGIN_USER';

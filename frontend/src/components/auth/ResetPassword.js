@@ -7,6 +7,7 @@
  *
  */
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useHistory, useParams } from 'react-router';
 import { Button, useResponseBox } from '..';
 import { resetPasswordSchema, validateSchema } from '../../helpers/schemas';
@@ -45,6 +46,10 @@ const ResetPassword = () => {
 
   return (
     <div className="w-full text-electromagnatic bg-white shadow-lg rounded-md p-3">
+      <Helmet>
+        <title>Reset Password</title>
+      </Helmet>
+
       <h1 className="text-2xl font-bold font-railway">Reset Password</h1>
 
       <MessageBox />
@@ -63,6 +68,7 @@ const ResetPassword = () => {
           />
           <p className="text-red-500 text-sm mt-1">{errors.password?.message}</p>
         </div>
+
         <div>
           <label htmlFor="confirmpassword" className="form-label">
             Confirm Password
@@ -76,6 +82,7 @@ const ResetPassword = () => {
           />
           <p className="text-red-500 text-sm mt-1">{errors.confirmPassword?.message}</p>
         </div>
+
         <Button type={'submit'} disabled={disabled} medium={true}>
           Reset
         </Button>

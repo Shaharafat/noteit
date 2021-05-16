@@ -7,7 +7,6 @@
  *
  */
 import jwt_decode from 'jwt-decode';
-import { Redirect } from 'react-router';
 import { getAllNotes } from '../store/actions/notes';
 import { getAllTags } from '../store/actions/tags';
 import { LOADING_END, LOGIN_USER, LOGOUT_USER } from '../store/constants';
@@ -31,8 +30,6 @@ export const authenticateAndFetchData = async (dispatch) => {
       // fetch all tags data
       await getAllTags(dispatch);
 
-      // if logged in . goto dashboard
-      <Redirect to="/dashboard" />;
       dispatch({ type: LOADING_END });
     } else {
       // remove token

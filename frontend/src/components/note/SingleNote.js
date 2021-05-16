@@ -11,10 +11,10 @@ import { formatDistance } from 'date-fns';
 import React, { useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { SingleTagName } from '.';
-import loader from '../icons/ball-loader.svg';
-import { deleteSingleNote } from '../store/actions/notes';
-import { useStore } from '../store/Store';
+import { SingleTagName } from '../';
+import loader from '../../icons/ball-loader.svg';
+import { deleteSingleNote } from '../../store/actions/notes';
+import { useStore } from '../../store/Store';
 
 const SingleNote = ({ note: { _id: id, title, tags, createdAt } }) => {
   // 🔧 format date

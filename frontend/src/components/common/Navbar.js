@@ -24,6 +24,7 @@ const Navbar = () => {
     dispatch,
   } = useStore();
 
+  // ⚙️ change theme on localstorage
   const toggleTheme = () => {
     localStorage.setItem('theme', `${theme === 'dark' ? 'light' : 'dark'}`);
     setTheme(localStorage.getItem('theme'));
@@ -41,6 +42,7 @@ const Navbar = () => {
           <img src={logo} alt="site logo" className="mr-2 w-10 py-3" />
           <h1 className="font-barlow text-3xl font-bold">Noteit</h1>
         </div>
+
         <button onClick={toggleTheme} className="text-2xl focus:outline-none ">
           {theme === 'dark' ? <FaSun /> : <FaMoon />}
         </button>

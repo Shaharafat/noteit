@@ -7,10 +7,10 @@
  *
  */
 import React, { useState } from 'react';
-import { Button, SingleNote } from '.';
-import loader from '../icons/double-ring-loader.svg';
-import { getNotesByTitle } from '../store/actions/notes';
-import { useStore } from '../store/Store';
+import { Button, SingleNote } from '../';
+import loader from '../../icons/double-ring-loader.svg';
+import { getNotesByTitle } from '../../store/actions/notes';
+import { useStore } from '../../store/Store';
 
 const NotesList = () => {
   const [searchText, setSearchText] = useState('');
@@ -20,6 +20,7 @@ const NotesList = () => {
     state: { notes },
   } = useStore();
 
+  // ⚙️ search note
   const searchNote = async (e) => {
     e.preventDefault();
 

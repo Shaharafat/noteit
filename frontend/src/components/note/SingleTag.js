@@ -8,12 +8,12 @@
  */
 import React from 'react';
 import { FaTag } from 'react-icons/fa';
-import { getNotesByTag } from '../store/actions/notes';
-import { useStore } from '../store/Store';
+import { getNotesByTag } from '../../store/actions/notes';
+import { useStore } from '../../store/Store';
 
 const SingleTag = ({ tag }) => {
   const { dispatch } = useStore();
-  // will execute when clicked on tag
+  // ⚙️ will execute when clicked on tag
   const searchTagNotes = async (tagName) => {
     await getNotesByTag(tagName, dispatch);
   };

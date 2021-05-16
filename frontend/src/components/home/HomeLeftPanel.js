@@ -7,7 +7,7 @@
  *
  */
 import React from 'react';
-import logo from '../icons/noteitlogo.png';
+import logo from '../../icons/noteitlogo.png';
 
 const HomeLeftPanel = () => {
   return (
@@ -20,6 +20,7 @@ const HomeLeftPanel = () => {
             Noteit
           </h1>
         </div>
+
         {/* subtitle */}
         <p className="text-electromagnatic font-railway text-md md:text-lg text-center font-semibold mt-4">
           Fast | Easy to use | Access from anywhere

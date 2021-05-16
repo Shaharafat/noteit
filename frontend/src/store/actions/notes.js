@@ -51,9 +51,8 @@ export const getNotesByTitle = async (title, dispatch) => {
     }
     return { success };
   } catch (error) {
-    // const { success, message } = error.response?.data;
-    // return { success, message };
-    console.log(error.response);
+    const { success, message } = error.response?.data;
+    return { success, message };
   }
 };
 
@@ -112,7 +111,6 @@ export const deleteSingleNote = async (dispatch, id, setLoading) => {
     if (success) {
       setLoading(false);
       dispatch({ type: DELETE_SINGLE_NOTE, payload: { id } });
-      console.log('deleted');
     }
 
     return { success, message };

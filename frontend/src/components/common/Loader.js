@@ -10,7 +10,7 @@ import React from 'react';
 
 const Loader = ({ loader }) => {
   return (
-    <div className="w-full min-h-screen grid place-items-center">
+    <div className="w-full min-h-screen bg-white dark:bg-wetEsphalt grid place-items-center">
       <img src={loader} className="w-12" />
     </div>
   );

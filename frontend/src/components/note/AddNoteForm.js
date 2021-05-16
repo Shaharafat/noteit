@@ -18,6 +18,7 @@ const AddNoteForm = () => {
   const [loading, setLoading] = useState(false);
   const { state, dispatch } = useStore();
 
+  // form validation
   const {
     register,
     handleSubmit,
@@ -32,6 +33,8 @@ const AddNoteForm = () => {
 
     data = { ...data, details: note, user: state.user.id };
     const response = await createNewNote(dispatch, data);
+
+    // TODO: show notification
     if (response.success) {
       console.log('successfull');
     }

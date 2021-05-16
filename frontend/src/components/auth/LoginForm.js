@@ -7,6 +7,7 @@
  *
  */
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link, useHistory } from 'react-router-dom';
 import { Button, useResponseBox } from '..';
 import { loginSchema, validateSchema } from '../../helpers/schemas';
@@ -26,7 +27,7 @@ const LoginForm = () => {
     formState: { errors },
   } = validateSchema(loginSchema);
 
-  // executes when form submitted
+  // ⚙️ executes when form submitted
   const login = async (data) => {
     setDisabled(true);
     const response = await loginUser(data, dispatch);
@@ -44,8 +45,13 @@ const LoginForm = () => {
 
   return (
     <div className="w-full text-electromagnatic bg-white shadow-lg rounded-md p-3">
+      <Helmet>
+        <title>Login | Noteit</title>
+      </Helmet>
+
       <h1 className="text-2xl font-bold font-railway">Login</h1>
       <MessageBox />
+
       {/* form */}
       <form onSubmit={handleSubmit(login)} className="mt-3">
         <div>
@@ -61,6 +67,7 @@ const LoginForm = () => {
           />
           <p className="text-red-500 text-sm mt-1">{errors.email?.message}</p>
         </div>
+
         <div>
           <label htmlFor="password" className="form-label">
             Password
@@ -74,10 +81,12 @@ const LoginForm = () => {
           />
           <p className="text-red-500 text-sm mt-1">{errors.password?.message}</p>
         </div>
+
         <Button type={'submit'} disabled={disabled} medium={true}>
           Login
         </Button>
       </form>
+
       <div className="border-t border-gray-200 mt-3">
         <p className="text-center mt-2 font-railway">
           New here?{' '}

@@ -8,35 +8,9 @@
  */
 import React from 'react';
 import ReactQuill from 'react-quill';
+import { formats, modules } from '../../helpers/editor';
 
 const Editor = ({ note, setNote }) => {
-  // this formats option of toolbar
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, false] }],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      ['code-block'],
-      [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
-      ['link'],
-      ['clean'],
-    ],
-  };
-
-  // formats and this options will work
-  const formats = [
-    'header',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'blockquote',
-    'code-block',
-    'list',
-    'bullet',
-    'indent',
-    'link',
-  ];
-
   return (
     <>
       <h3 className="text-electromagnatic dark:text-antiFlashWhite mt-3 font-semibold">Note</h3>

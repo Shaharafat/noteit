@@ -12,8 +12,8 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { FaStar } from 'react-icons/fa';
 import { useParams } from 'react-router';
-import { Loader, SingleTagName } from '.';
-import loader from '../icons/loader.svg';
+import { Loader, SingleTagName } from '../';
+import loader from '../../icons/loader.svg';
 
 const NoteDetails = () => {
   const { noteId } = useParams();

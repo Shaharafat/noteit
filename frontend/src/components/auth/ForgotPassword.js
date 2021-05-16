@@ -7,6 +7,7 @@
  *
  */
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { Button, useResponseBox } from '..';
 import { forgotPasswordSchema, validateSchema } from '../../helpers/schemas';
@@ -22,7 +23,7 @@ const ForgotPassword = () => {
     formState: { errors },
   } = validateSchema(forgotPasswordSchema);
 
-  // executes when form submitted
+  // ⚙️ executes when form submitted
   const getResetEmail = async (data) => {
     setDisabled(true);
     const response = await sendResetEmail(data);
@@ -39,8 +40,13 @@ const ForgotPassword = () => {
 
   return (
     <div className="w-full text-electromagnatic bg-white shadow-lg rounded-md p-3">
+      <Helmet>
+        <title>Forgot Password | Noteit</title>
+      </Helmet>
+
       <h1 className="text-2xl font-bold font-railway">Forgot Password</h1>
       <MessageBox />
+
       {/* form */}
       <form onSubmit={handleSubmit(getResetEmail)} className="mt-3">
         <div>
@@ -54,11 +60,14 @@ const ForgotPassword = () => {
             placeholder="Type email"
             {...register('email')}
           />
+
           <p className="text-red-500 text-sm mt-1">{errors.email?.message}</p>
+
           <small className="text-blue-400">
             We will sent you a password reset link to your email
           </small>
         </div>
+
         <Button type={'submit'} medium={true} disabled={disabled}>
           Get Reset Link
         </Button>

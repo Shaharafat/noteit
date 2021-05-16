@@ -7,6 +7,7 @@
  *
  */
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link, useHistory } from 'react-router-dom';
 import { Button, useResponseBox } from '..';
 import { signupSchema, validateSchema } from '../../helpers/schemas';
@@ -53,6 +54,10 @@ const RegisterForm = () => {
 
   return (
     <div className="w-full text-electromagnatic bg-white shadow-lg rounded-md p-3">
+      <Helmet>
+        <title>Register | Noteit</title>
+      </Helmet>
+
       <h1 className="text-2xl font-bold font-railway">Sign up</h1>
 
       <MessageBox />
