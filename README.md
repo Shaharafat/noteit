@@ -2,6 +2,10 @@
 
 A MERN stack project. 
 Its a fast and easy to use note taking application for DESKTOP. User will be able to create note, search note with tag or title.User can access his notes from any device by logging in. 
+
+Sample Account : contact.shaharafat@yahoo.com  
+password: shah1ArafaT
+
 ----
 ![Home page image](https://i.postimg.cc/25xqNyM9/noteit-1.png)
 
@@ -25,7 +29,7 @@ Main note saved as HTML, then I inject it in HTML. All notes content designed wi
 - React router
 - Express
 - MongoDB
-- React Hook Form (with joi validation)
+- React Hook Form (with yup validation)
 - Tailwind CSS
 - React quill (Rich Editor)
 - JWT
